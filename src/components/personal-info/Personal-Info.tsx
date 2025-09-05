@@ -1,3 +1,4 @@
+import styles from './Personal-Info.module.css';
 import { Button } from '../button';
 import type { PersonalInfoState, PersonalInfoAction, PersonalInfoReducer } from './Personal-Info.types';
 import { useReducer } from 'react';
@@ -24,10 +25,12 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       };
     case 'VALIDATE':
       isValid = true;
-      let hasNameError = false, hasEmailError = false, hasPhoneNumberError = false;
+      let hasNameError = false;
+      let hasEmailError = false;
+      let hasPhoneNumberError = false;
 
       if (name.value === '') {
-        name.error = 'Name cannot be empty';
+        name.error = 'This field is required';
         hasNameError = true;
         isValid = false;
       }
@@ -37,7 +40,7 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       }
 
       if (email.value === '') {
-        email.error = 'Email cannot be empty';
+        email.error = 'This field is required';
         hasEmailError = true;
         isValid = false;
       }
@@ -47,7 +50,7 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       }
 
       if (phoneNumber.value === '') {
-        phoneNumber.error = 'Phone number cannot be empty';
+        phoneNumber.error = 'This field is required';
         hasPhoneNumberError = true;
         isValid = false;
       }
@@ -89,44 +92,55 @@ export function PersonalInfo() {
   };
 
   return (
-    <article>
-      <header>
-        <h1>Personal Info</h1>
-        <p>Please provide your name, email address, and phone number.</p>
-      </header>
-      <form>
-        <div>
-          <label htmlFor='name'>Name:<span>*</span></label>
-          <input
-            type='text'
-            required
-            value={ name.value }
-            onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
+    <>
+      <article className={styles['personal-info']}>
+        <header className={styles['header']}>
+          <h1>Personal Info</h1>
+          <p>Please provide your name, email address, and phone number.</p>
+        </header>
+        <form className={styles['form']}>
+          <div className={styles['input-wrapper']}>
+            <div className={styles['label-wrapper']}>
+              <label htmlFor='name'>Name</label>
+              <span className={styles['error']}>{ name.error }</span>
+            </div>
+            <input
+              type='text'
+              required
+              value={ name.value }
+              onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
+              className={styles['input']}
             />
-          <p>{ name.error }</p>
-        </div>
-        <div>
-          <label htmlFor='email'>Email Address:<span>*</span></label>
-          <input
-            type='email'
-            required
-            value={ email.value }
-            onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
+          </div>
+          <div className={styles['input-wrapper']}>
+            <div className={styles['label-wrapper']}>
+              <label htmlFor='email'>Email Address</label>
+              <span className={styles['error']}>{ email.error }</span>
+            </div>
+            <input
+              type='email'
+              required
+              value={ email.value }
+              onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
+              className={styles['input']}
             />
-          <p>{ email.error }</p>
-        </div>
-        <div>
-          <label htmlFor='phone'>Phone Number:<span>*</span></label>
-          <input
-            type='tel'
-            required
-            value={ phoneNumber.value }
-            onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
-          />
-          <p>{ phoneNumber.error }</p>
-        </div>
-      </form>
+          </div>
+          <div className={styles['input-wrapper']}>
+            <div className={styles['label-wrapper']}>
+              <label htmlFor='phone'>Phone Number</label>
+              <span className={styles['error']}>{ phoneNumber.error }</span>
+            </div>
+            <input
+              type='tel'
+              required
+              value={ phoneNumber.value }
+              onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
+              className={styles['input']}
+            />
+          </div>
+        </form>
+      </article>
       <Button validationSettings={{ validate: validator, isValid: isValid, uri: '/select-plan' }}>Next</Button>
-    </article>
+    </>
   );
 };

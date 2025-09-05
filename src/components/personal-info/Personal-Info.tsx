@@ -23,10 +23,38 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
         phoneNumber: { value: action.payload, error: phoneNumber.error }
       };
     case 'VALIDATE':
-      const hasNameError = name.value ? true : false;
-      const hasEmailError = email.value ? true : false;
-      const hasPhoneNumberError = phoneNumber.value ? true : false;
-      isValid = hasNameError && hasEmailError && hasPhoneNumberError;
+      isValid = true;
+      let hasNameError = false, hasEmailError = false, hasPhoneNumberError = false;
+
+      if (name.value === '') {
+        name.error = 'Name cannot be empty';
+        hasNameError = true;
+        isValid = false;
+      }
+      else {
+        name.error = '';
+        hasNameError = false;
+      }
+
+      if (email.value === '') {
+        email.error = 'Email cannot be empty';
+        hasEmailError = true;
+        isValid = false;
+      }
+      else {
+        email.error = '';
+        hasEmailError = false;
+      }
+
+      if (phoneNumber.value === '') {
+        phoneNumber.error = 'Phone number cannot be empty';
+        hasPhoneNumberError = true;
+        isValid = false;
+      }
+      else {
+        phoneNumber.error = '';
+        hasPhoneNumberError = false;
+      }
 
       return {
         ...state,
@@ -68,40 +96,34 @@ export function PersonalInfo() {
       </header>
       <form>
         <div>
-          <div>
-            <label htmlFor='name'>*Name:</label>
-            <span></span>
-          </div>
+          <label htmlFor='name'>Name:<span>*</span></label>
           <input
             type='text'
             required
             value={ name.value }
-            onChange={ (event) => dispatch({ type: "SET_NAME", payload: event.target.value }) }
-          />
+            onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
+            />
+          <p>{ name.error }</p>
         </div>
         <div>
-          <div>
-            <label htmlFor='email'>*Email Address:</label>
-            <span></span>
-          </div>
+          <label htmlFor='email'>Email Address:<span>*</span></label>
           <input
             type='email'
             required
             value={ email.value }
             onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
-          />
+            />
+          <p>{ email.error }</p>
         </div>
         <div>
-          <div>
-            <label htmlFor='phone'>*Phone Number:</label>
-            <span></span>
-          </div>
+          <label htmlFor='phone'>Phone Number:<span>*</span></label>
           <input
             type='tel'
             required
             value={ phoneNumber.value }
             onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
           />
+          <p>{ phoneNumber.error }</p>
         </div>
       </form>
       <Button validationSettings={{ validate: validator, isValid: isValid, uri: '/select-plan' }}>Next</Button>

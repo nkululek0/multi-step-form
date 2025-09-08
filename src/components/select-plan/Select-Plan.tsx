@@ -37,10 +37,8 @@ export function SelectPlan() {
   const { plan, billing } = planAndBilling;
 
   // Acts as a way to show that the state has been updated (should end up on global state)
-  const updatedState: PlanAndBillingState = {
-    plan: { type: plan.type, price: plan.price },
-    billing: billing
-  };
+  defaultState.plan = { type: plan.type, price: plan.price };
+  defaultState.billing = billing;
 
   return (
     <>
@@ -78,9 +76,6 @@ export function SelectPlan() {
           <p>Yearly</p>
         </section>
       </article>
-      <pre>
-        { JSON.stringify(updatedState, null, 2) }
-      </pre>
       <section className='actions'>
         <Link to='/'>Go Back</Link>
         <button><Link to='/add-ons'>next</Link></button>

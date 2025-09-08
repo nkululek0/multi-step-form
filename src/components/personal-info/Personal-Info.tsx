@@ -36,7 +36,6 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       }
       else {
         name.error = '';
-        hasNameError = false;
       }
 
       if (email.value === '') {
@@ -46,7 +45,6 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       }
       else {
         email.error = '';
-        hasEmailError = false;
       }
 
       if (phoneNumber.value === '') {
@@ -56,7 +54,6 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       }
       else {
         phoneNumber.error = '';
-        hasPhoneNumberError = false;
       }
 
       return {

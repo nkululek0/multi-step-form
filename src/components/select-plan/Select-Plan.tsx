@@ -35,10 +35,7 @@ export function SelectPlan() {
 
   const [planAndBilling, dispatch] = useReducer(reducer, defaultState);
   const { plan, billing } = planAndBilling;
-
-  // Acts as a way to show that the state has been updated (should end up on global state)
-  defaultState.plan = { type: plan.type, price: plan.price };
-  defaultState.billing = billing;
+  const additionalContent = billing === 'YEARLY' ? '2 months free' : '';
 
   return (
     <>
@@ -51,27 +48,39 @@ export function SelectPlan() {
           <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'ARCADE', price: 9 } }) } }>
             <img src={ ArcadeImage } alt='arcade image' />
             <h4>Arcade</h4>
-            <p>$9/mo</p>
-            <p className="additional-content">2 months free</p> { /* Ensure that class active is only applied when plan is yearly */}
+            <p>
+              { billing === 'YEARLY' ? '$90/yr' : '$9/mo' }
+            </p>
+            <p className='additional-content'>
+              { additionalContent }
+            </p>
           </div>
           <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'ADVANCED', price: 12 } }) } }>
             <img src={ AdvancedImage } alt='arcade image' />
             <h4>Advanced</h4>
-            <p>$12/mo</p>
-            <p className="additional-content">2 months free</p>
+            <p>
+              {  billing === 'YEARLY' ? '$120/yr' : '$12/mo' }
+            </p>
+            <p className='additional-content'>
+              { additionalContent }
+            </p>
           </div>
           <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'PRO', price: 15 } }) } }>
             <img src={ ProImage } alt='arcade image' />
             <h4>Pro</h4>
-            <p>$15/mo</p>
-            <p className="additional-content">2 months free</p>
+            <p>
+              { billing === 'YEARLY' ? '$150/yr' : '$15/mo' }
+            </p>
+            <p className='additional-content'>
+              { additionalContent }
+            </p>
           </div>
         </section>
         <section className='billing'>
           <p>Monthly</p>
-          <label className="switch">
-            <input type="checkbox"  onChange={ () => { dispatch({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
-            <span className="slider round"></span>
+          <label className='switch'>
+            <input type='checkbox'  onChange={ () => { dispatch({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
+            <span className='slider round'></span>
           </label>
           <p>Yearly</p>
         </section>

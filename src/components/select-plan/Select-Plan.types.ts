@@ -1,22 +1,34 @@
+// Select Plan Types
 type PlanType = 'ARCADE' | 'ADVANCED' | 'PRO';
 type BillingType = 'MONTHLY' | 'YEARLY';
 type Plan = { type: PlanType, price: number };
 
 export type PlanAndBillingState = {
     plan: Plan,
-    billing: BillingType
+    billing: BillingType,
+    isValid: boolean
 };
 
-type ActionPlan = {
+type ActionPlanAndBillingPlan = {
   type: 'SET_PLAN',
   payload: Plan
 };
 
-type ActionBilling = {
+type ActionPlanAndBillingBilling = {
   type: 'SET_BILLING',
   payload: BillingType
 };
 
-export type PlanAndBillingAction = ActionPlan | ActionBilling;
+export type PlanAndBillingAction = ActionPlanAndBillingPlan | ActionPlanAndBillingBilling;
 
 export type PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAndBillingAction) => PlanAndBillingState;
+// END Select Plan Types
+
+// Next Button Types
+export type NextButtonState = {
+  uri: '/add-ons' | '/'
+  isValid: boolean
+};
+
+export type NextButtonReducer = (state: NextButtonState) => NextButtonState;
+// END Next Button Types

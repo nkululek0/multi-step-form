@@ -2,14 +2,14 @@ import ArcadeImage from '../../assets/images/icon-arcade.svg';
 import AdvancedImage from '../../assets/images/icon-advanced.svg';
 import ProImage from '../../assets/images/icon-pro.svg';
 
-import type { PlanAndBillingReducer, PlanAndBillingState, PlanAndBillingAction } from './Select-Plan.types';
+import type { PlanAndBillingReducer, PlanAndBillingState, PlanAndBillingAction, NextButtonState, NextButtonReducer } from './Select-Plan.types';
 
 import { Button } from '../button';
 
 import { Link } from 'react-router-dom';
 import { useReducer } from 'react';
 
-const reducer: PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAndBillingAction) => {
+const planAndBillingReducer: PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAndBillingAction) => {
   const { type } = action;
   switch (type) {
     case 'SET_PLAN':
@@ -27,25 +27,34 @@ const reducer: PlanAndBillingReducer = (state: PlanAndBillingState, action: Plan
   }
 };
 
+const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
+  // Content in here should check if personal information exists
+  // And if not, redirect to personal info page
+  // Else navigate to next page
+  // Both conditions should manipulate the uri
+  return {
+    ...state,
+    isValid: true
+  };
+};
+
 export function SelectPlan() {
 
-  const defaultState: PlanAndBillingState = {
+  const planAndBillingState: PlanAndBillingState = {
     plan: { type: 'ARCADE', price: 9 },
-    billing: 'MONTHLY'
+    billing: 'MONTHLY',
+    isValid: false
   };
-
-  const [planAndBilling, dispatch] = useReducer(reducer, defaultState);
+  const [planAndBilling, setPlanAndBilling] = useReducer(planAndBillingReducer, planAndBillingState);
   const { billing } = planAndBilling;
   const additionalContent = billing === 'YEARLY' ? '2 months free' : '';
-  let isValid = false;
 
-  const validator = () => {
-    // Content in here should check if personal information exists
-    // And if not, redirect to personal info page
-    // Else navigate to next page
-    // Both conditions should manipulate the uri
-    isValid = true;
+  const nextButtonState: NextButtonState = {
+    uri: '/add-ons',
+    isValid: false
   };
+  const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
+  const { uri, isValid } = nextButton;
 
   return (
     <>
@@ -55,7 +64,7 @@ export function SelectPlan() {
           <p>You have the option of monthly or yearly billing.</p>
         </header>
         <section className='plan'>
-          <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'ARCADE', price: 9 } }) } }>
+          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'ARCADE', price: 9 } }) } }>
             <img src={ ArcadeImage } alt='arcade image' />
             <h4>Arcade</h4>
             <p>
@@ -65,7 +74,7 @@ export function SelectPlan() {
               { additionalContent }
             </p>
           </div>
-          <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'ADVANCED', price: 12 } }) } }>
+          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'ADVANCED', price: 12 } }) } }>
             <img src={ AdvancedImage } alt='arcade image' />
             <h4>Advanced</h4>
             <p>
@@ -75,7 +84,7 @@ export function SelectPlan() {
               { additionalContent }
             </p>
           </div>
-          <div onClick={ () => { dispatch({ type: 'SET_PLAN', payload: { type: 'PRO', price: 15 } }) } }>
+          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'PRO', price: 15 } }) } }>
             <img src={ ProImage } alt='arcade image' />
             <h4>Pro</h4>
             <p>
@@ -89,7 +98,7 @@ export function SelectPlan() {
         <section className='billing'>
           <p>Monthly</p>
           <label className='switch'>
-            <input type='checkbox' onChange={ () => { dispatch({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
+            <input type='checkbox' onChange={ () => { setPlanAndBilling({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
             <span className='slider round'></span>
           </label>
           <p>Yearly</p>
@@ -97,7 +106,7 @@ export function SelectPlan() {
       </article>
       <section className='actions'>
         <Link to='/'>Go Back</Link>
-        <Button validationSettings={ { validate: validator, uri: '/add-ons', isValid: isValid } }>Next</Button>
+        <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } }>Next</Button>
       </section>
     </>
   );

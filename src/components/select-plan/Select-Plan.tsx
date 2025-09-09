@@ -4,8 +4,9 @@ import ProImage from '../../assets/images/icon-pro.svg';
 
 import type { PlanAndBillingReducer, PlanAndBillingState, PlanAndBillingAction } from './Select-Plan.types';
 
-import { Link } from 'react-router-dom';
+import { Button } from '../button';
 
+import { Link } from 'react-router-dom';
 import { useReducer } from 'react';
 
 const reducer: PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAndBillingAction) => {
@@ -34,8 +35,17 @@ export function SelectPlan() {
   };
 
   const [planAndBilling, dispatch] = useReducer(reducer, defaultState);
-  const { plan, billing } = planAndBilling;
+  const { billing } = planAndBilling;
   const additionalContent = billing === 'YEARLY' ? '2 months free' : '';
+  let isValid = false;
+
+  const validator = () => {
+    // Content in here should check if personal information exists
+    // And if not, redirect to personal info page
+    // Else navigate to next page
+    // Both conditions should manipulate the uri
+    isValid = true;
+  };
 
   return (
     <>
@@ -79,7 +89,7 @@ export function SelectPlan() {
         <section className='billing'>
           <p>Monthly</p>
           <label className='switch'>
-            <input type='checkbox'  onChange={ () => { dispatch({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
+            <input type='checkbox' onChange={ () => { dispatch({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
             <span className='slider round'></span>
           </label>
           <p>Yearly</p>
@@ -87,7 +97,7 @@ export function SelectPlan() {
       </article>
       <section className='actions'>
         <Link to='/'>Go Back</Link>
-        <button><Link to='/add-ons'>next</Link></button>
+        <Button validationSettings={ { validate: validator, uri: '/add-ons', isValid: isValid } }>Next</Button>
       </section>
     </>
   );

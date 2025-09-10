@@ -1,52 +1,39 @@
-import type { AddOnsState, AddOnsReducer, AddOnsAction, AddOnsPackage, AddOnsActionType } from './Add-Ons.types';
+import type { AddOnsState, AddOnsReducer, AddOnsAction } from './Add-Ons.types';
 
 import { useReducer, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-const packageTypes = {
-  'Online service': {
-    name: 'Online service',
-    amount: 1
-  },
-  'Larger storage': {
-    name: 'Larger storage',
-    amount: 2
-  },
-  'Customisable profile': {
-    name: 'Customisable profile',
-    amount: 2
-  }
-};
-
 const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => {
-  let { billingType, totalBill } = state;
+  const { type, elementReference } = action;
 
-  if (action.type === 'ADD') {
-    state.packages.add(packageTypes[action.package] as AddOnsPackage);
+  switch (type) {
+    case 'ONLINE_SERVICE':
+      return {
+        ...state,
+        onlineService: elementReference.current ? elementReference.current.checked : false
+      };
+    case 'LARGER_STORAGE':
+      return {
+        ...state,
+        largerStorage: elementReference.current ? elementReference.current.checked : false
+      };
+    case 'CUSTOMIZABLE_PROFILE':
+      return {
+        ...state,
+        customizableProfile: elementReference.current ? elementReference.current.checked : false
+      };
+    default:
+      return state;
   }
-  else if (action.type === 'REMOVE') {
-    state.packages.forEach((packageType) => {
-      if (packageType.name === action.package) {
-        state.packages.delete(packageType);
-      }
-    });
-  }
-
-  state.packages.forEach((packageType) => (
-    totalBill += billingType === 'YEARLY' ? packageType.amount * 10 : packageType.amount
-  ));
-
-  return {
-    ...state
-  };
 };
 
 export function AddOns() {
 
   const addOnsState: AddOnsState = {
     billingType: 'MONTHLY',
-    packages: new Set(),
-    totalBill: 0
+    onlineService: false,
+    largerStorage: false,
+    customizableProfile: false
   };
   const [addOns, setAddOns] = useReducer(addOnsReducer, addOnsState);
   const { billingType } = addOns;
@@ -54,17 +41,6 @@ export function AddOns() {
   const onlineServiceCheckbox = useRef<HTMLInputElement>(null);
   const largerStorageCheckbox = useRef<HTMLInputElement>(null);
   const customizableProfileCheckbox = useRef<HTMLInputElement>(null);
-
-  const handleChange = (elementReference: React.RefObject<HTMLInputElement | null>) => {
-    let result: 'ADD' | 'REMOVE' = 'ADD';
-    if (elementReference.current) {
-      if (!elementReference.current.checked) {
-        result = 'REMOVE';
-      }
-    }
-
-    return result;
-  };
 
   return (
     <>
@@ -81,7 +57,7 @@ export function AddOns() {
                 id='online-service'
                 name='online-service'
                 ref={ onlineServiceCheckbox }
-                onChange={ () => { setAddOns({ type: handleChange(onlineServiceCheckbox) as AddOnsActionType, package: 'Online service' }) } }
+                onChange={ () => { setAddOns({ type: 'ONLINE_SERVICE', elementReference: onlineServiceCheckbox }) } }
               />
               <label htmlFor='online-service'>Online service</label>
               <p>Access to multiplayer games</p>
@@ -93,7 +69,7 @@ export function AddOns() {
                 id='larger-storage'
                 name='larger-storage'
                 ref={ largerStorageCheckbox }
-                onChange={ () => { setAddOns({ type: handleChange(largerStorageCheckbox) as AddOnsActionType, package: 'Larger storage' }) } }
+                onChange={ () => { setAddOns({ type: 'LARGER_STORAGE', elementReference: largerStorageCheckbox }) } }
               />
               <label htmlFor='larger-storage'>Larger storage</label>
               <p>Extra 1TB of cloud save</p>
@@ -105,7 +81,7 @@ export function AddOns() {
                 id='customizable-profile'
                 name='customizable-profile'
                 ref={ customizableProfileCheckbox }
-                onChange={ () => {  } }
+                onChange={ () => { setAddOns({ type: 'CUSTOMIZABLE_PROFILE', elementReference: customizableProfileCheckbox }) } }
               />
               <label htmlFor='customizable-profile'>Customizable profile</label>
               <p>Custom theme on your profile</p>

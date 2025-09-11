@@ -18,7 +18,7 @@ export type AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => AddOns
 
 // NextButton Types
 export type NextButtonState = {
-    uri: '/' | '/summary',
+    uri: '/' | '/finishing-up',
     isValid: boolean
 };
 

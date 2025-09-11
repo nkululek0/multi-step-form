@@ -56,7 +56,7 @@ export function AddOns() {
   const customizableProfileCheckbox = useRef<HTMLInputElement>(null);
 
   const nextButtonState: NextButtonState = {
-    uri: '/summary',
+    uri: '/finishing-up',
     isValid: false
   };
   const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);

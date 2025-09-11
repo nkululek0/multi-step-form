@@ -1,4 +1,6 @@
-import type { AddOnsState, AddOnsReducer, AddOnsAction } from './Add-Ons.types';
+import type { AddOnsState, AddOnsReducer, AddOnsAction, NextButtonState, NextButtonReducer } from './Add-Ons.types';
+
+import { Button } from '../button';
 
 import { useReducer, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -27,6 +29,17 @@ const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) 
   }
 };
 
+const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
+  // Content in here should check if personal information exists
+  // And if not, redirect to personal info page
+  // Else navigate to next page
+  // Both conditions should manipulate the uri
+  return {
+    ...state,
+    isValid: true
+  };
+};
+
 export function AddOns() {
 
   const addOnsState: AddOnsState = {
@@ -41,6 +54,13 @@ export function AddOns() {
   const onlineServiceCheckbox = useRef<HTMLInputElement>(null);
   const largerStorageCheckbox = useRef<HTMLInputElement>(null);
   const customizableProfileCheckbox = useRef<HTMLInputElement>(null);
+
+  const nextButtonState: NextButtonState = {
+    uri: '/summary',
+    isValid: false
+  };
+  const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
+  const { uri, isValid } = nextButton;
 
   return (
     <>
@@ -91,12 +111,9 @@ export function AddOns() {
         </section>
         <section className='actions'>
           <Link to='/select-plan'>go back</Link>
-          <button><Link to='/summary'>next</Link></button>
+          <Button validationSettings={ { validate: () => { setNextButton(); }, uri: uri, isValid: isValid } }>Next</Button>
         </section>
       </article>
-      <pre>
-        { JSON.stringify(addOns, null, 2) }
-      </pre>
     </>
   );
 };

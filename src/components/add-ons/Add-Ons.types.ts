@@ -1,3 +1,4 @@
+// Add-Ons Types
 export type AddOnsState = {
     billingType: 'MONTHLY' | 'YEARLY',
     onlineService: boolean,
@@ -13,3 +14,13 @@ export type AddOnsAction = {
 };
 
 export type AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => AddOnsState;
+// END Add-Ons Types
+
+// NextButton Types
+export type NextButtonState = {
+    uri: '/' | '/summary',
+    isValid: boolean
+};
+
+export type NextButtonReducer = (state: NextButtonState) => NextButtonState;
+// END Next Button Types

@@ -1,6 +1,10 @@
 import styles from './Personal-Info.module.css';
+
 import { Button } from '../button';
 import type { PersonalInfoState, PersonalInfoAction, PersonalInfoReducer } from './Personal-Info.types';
+
+import { useGlobalContext } from '../../app/provider';
+
 import { useReducer } from 'react';
 
 const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: PersonalInfoAction) => {
@@ -67,77 +71,70 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
 
 export function PersonalInfo() {
 
-  const defaultState: PersonalInfoState = {
-    name: {
-      value: '',
-      error: '',
-    },
-    email: {
-      value: '',
-      error: '',
-    },
-    phoneNumber: {
-      value: '',
-      error: '',
-    },
-    isValid: false
-  };
-  const [personalInfo, dispatch] = useReducer(reducer, defaultState);
+  const globalState = useGlobalContext();
+  const personalInfoState: PersonalInfoState = globalState.personalInfo;
+  const [personalInfo, dispatch] = useReducer(reducer, personalInfoState);
   const { name, email, phoneNumber, isValid } = personalInfo;
   const validator = () => {
     dispatch({ type: 'VALIDATE' });
   };
 
+  globalState.personalInfo = personalInfo;
+
   return (
     <>
-      <article className={styles['personal-info']}>
-        <header className={styles['header']}>
-          <h1>Personal Info</h1>
-          <p>Please provide your name, email address, and phone number.</p>
-        </header>
-        <form className={styles['form']}>
-          <div className={styles['input-wrapper']}>
-            <div className={styles['label-wrapper']}>
-              <label htmlFor='name'>Name</label>
-              <span className={styles['error']}>{ name.error }</span>
+      <article className='personal-info-wrapper'>
+        <section className={styles['personal-info']}>
+          <header className={styles['header']}>
+            <h1>Personal Info</h1>
+            <p>Please provide your name, email address, and phone number.</p>
+          </header>
+          <form className={styles['form']}>
+            <div className={styles['input-wrapper']}>
+              <div className={styles['label-wrapper']}>
+                <label htmlFor='name'>Name</label>
+                <span className={styles['error']}>{ name.error }</span>
+              </div>
+              <input
+                type='text'
+                required
+                value={ name.value }
+                onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
+                className={styles['input']}
+              />
             </div>
-            <input
-              type='text'
-              required
-              value={ name.value }
-              onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
-              className={styles['input']}
-            />
-          </div>
-          <div className={styles['input-wrapper']}>
-            <div className={styles['label-wrapper']}>
-              <label htmlFor='email'>Email Address</label>
-              <span className={styles['error']}>{ email.error }</span>
+            <div className={styles['input-wrapper']}>
+              <div className={styles['label-wrapper']}>
+                <label htmlFor='email'>Email Address</label>
+                <span className={styles['error']}>{ email.error }</span>
+              </div>
+              <input
+                type='email'
+                required
+                value={ email.value }
+                onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
+                className={styles['input']}
+              />
             </div>
-            <input
-              type='email'
-              required
-              value={ email.value }
-              onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
-              className={styles['input']}
-            />
-          </div>
-          <div className={styles['input-wrapper']}>
-            <div className={styles['label-wrapper']}>
-              <label htmlFor='phone'>Phone Number</label>
-              <span className={styles['error']}>{ phoneNumber.error }</span>
+            <div className={styles['input-wrapper']}>
+              <div className={styles['label-wrapper']}>
+                <label htmlFor='phone'>Phone Number</label>
+                <span className={styles['error']}>{ phoneNumber.error }</span>
+              </div>
+              <input
+                type='tel'
+                required
+                value={ phoneNumber.value }
+                onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
+                className={styles['input']}
+              />
             </div>
-            <input
-              type='tel'
-              required
-              value={ phoneNumber.value }
-              onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
-              className={styles['input']}
-            />
-          </div>
-        </form>
+          </form>
+        </section>
+        <section className='actions'>
+          <Button validationSettings={{ validate: validator, isValid: isValid, uri: '/select-plan' }}>Next</Button>
+        </section>
       </article>
-      <Button validationSettings={{ validate: validator, isValid: isValid, uri: '/select-plan' }}>Next</Button>
     </>
   );
 };

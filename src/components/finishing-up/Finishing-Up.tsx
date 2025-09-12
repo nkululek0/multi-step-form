@@ -16,6 +16,7 @@ export function FinishingUp() {
   };
   const finishingUp = useRef(finishingUpState);
   const { plan, billing, addOnsList } = finishingUp.current;
+  const billingAbbreviation = billing === 'MONTHLY' ? 'mo' : 'yr';
 
   return (
     <>
@@ -32,20 +33,26 @@ export function FinishingUp() {
                   <h3>{ plan.type } ({ billing })</h3>
                     <Link to='/add-ons'>Change</Link>
                 </div>
-                <p className="add-ons-plan-price">${ plan.price }{  billing === 'MONTHLY' ? '/mo': '/yr' }</p>
+                <p className="add-ons-plan-price">${ plan.price }{  billingAbbreviation }</p>
               </header>
               <hr />
-              {
-                addOnsList.map((addOn) => {
-                  return (
-                    <div className="add-ons-list">
-                      <p>{addOn.name}</p>
-                      <p>{addOn.price}</p>
-                    </div>
-                  );
-                })
-              }
+              <div className="add-ons-list">
+                {
+                  addOnsList.map((addOn, key) => {
+                    return (
+                      <p className="add-on" key={ key }>
+                        <span>{addOn.name}</span>
+                        <span>+${addOn.price}/{ billingAbbreviation }</span>
+                      </p>
+                    );
+                  })
+                }
+              </div>
             </section>
+            <p className="add-ons-total">
+              <span>Total (per { billing })</span>
+              <span>+${ plan.price }{ billingAbbreviation }</span>
+            </p>
           </article>
         </section>
         <section className="actions">

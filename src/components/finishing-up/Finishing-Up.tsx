@@ -1,7 +1,19 @@
-import type { FinishingUpState } from "./Finishing-Up.types";
+import { Button } from "../button";
+import type { FinishingUpState, NextButtonState, NextButtonReducer } from "./Finishing-Up.types";
 
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useReducer } from "react";
+
+const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
+  // Content in here should check if personal information exists
+  // And if not, redirect to personal info page
+  // Else navigate to next page
+  // Both conditions should manipulate the uri
+  return {
+    ...state,
+    isValid: true
+  };
+};
 
 export function FinishingUp() {
 
@@ -17,6 +29,13 @@ export function FinishingUp() {
   const finishingUp = useRef(finishingUpState);
   const { plan, billing, addOnsList } = finishingUp.current;
   const billingAbbreviation = billing === 'MONTHLY' ? 'mo' : 'yr';
+
+  const nextButtonState: NextButtonState = {
+    uri: '/summary',
+    isValid: false
+  };
+  const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
+  const { uri, isValid } = nextButton;
 
   return (
     <>
@@ -57,7 +76,7 @@ export function FinishingUp() {
         </section>
         <section className="actions">
           <Link to='/add-ons'>Go Back</Link>
-          <button><Link to='/summary'>Confirm</Link></button>
+          <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } } >Confirm</Button>
         </section>
       </article>
     </>

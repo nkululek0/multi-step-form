@@ -10,3 +10,10 @@ export type FinishingUpState = {
     billing: BillingType
     addOnsList: Array<{ name: AddOnType, price: number }>,
 };
+
+export type NextButtonState = {
+    uri: '/' | '/summary',
+    isValid: boolean
+};
+
+export type NextButtonReducer = (state: NextButtonState) => NextButtonState;

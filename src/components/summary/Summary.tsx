@@ -9,7 +9,7 @@ export function Summary() {
         <p className="summary">
           Thanks for confirming your subscription! We hope you have fun using
           our platform. If you ever need support, please feel free to email us
-          at 2V6Yb@example.com
+          at nkuluekozikode@gmail.com
         </p>
       </article>
     </>

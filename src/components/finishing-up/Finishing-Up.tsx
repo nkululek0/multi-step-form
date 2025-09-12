@@ -1,8 +1,8 @@
-import { Button } from "../button";
-import type { FinishingUpState, NextButtonState, NextButtonReducer } from "./Finishing-Up.types";
+import { Button } from '../button';
+import type { FinishingUpState, NextButtonState, NextButtonReducer } from './Finishing-Up.types';
 
-import { Link } from "react-router-dom";
-import { useRef, useReducer } from "react";
+import { Link } from 'react-router-dom';
+import { useRef, useReducer } from 'react';
 
 const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
   // Content in here should check if personal information exists
@@ -39,46 +39,46 @@ export function FinishingUp() {
 
   return (
     <>
-      <article className="finishing-up">
-        <section className="content">
+      <article className='finishing-up'>
+        <section className='content'>
           <header>
             <h1>Finishing Up</h1>
             <p>Double-check everything looks OK before confirming.</p>
           </header>
-          <article className="summary">
-            <section className="add-ons-wrapper">
-              <header className="add-ons-plan-header">
+          <article className='summary'>
+            <section className='add-ons-wrapper'>
+              <header className='add-ons-plan-header'>
                 <div>
                   <h3>{ plan.type } ({ billing })</h3>
-                    <Link to='/add-ons'>Change</Link>
+                  <Link to='/add-ons'>Change</Link>
                 </div>
-                <p className="add-ons-plan-price">${ plan.price }{  billingAbbreviation }</p>
+                <p className='add-ons-plan-price'>${ plan.price }{  billingAbbreviation }</p>
               </header>
               <hr />
-              <div className="add-ons-list">
+              <div className='add-ons-list'>
                 {
                   addOnsList.map((addOn, key) => {
                     return (
-                      <p className="add-on" key={ key }>
-                        <span>{addOn.name}</span>
-                        <span>+${addOn.price}/{ billingAbbreviation }</span>
+                      <p className='add-on' key={ key }>
+                        <span>{ addOn.name }</span>
+                        <span>+${ addOn.price }/{ billingAbbreviation }</span>
                       </p>
                     );
                   })
                 }
               </div>
             </section>
-            <p className="add-ons-total">
+            <p className='add-ons-total'>
               <span>Total (per { billing })</span>
               <span>+${ plan.price }{ billingAbbreviation }</span>
             </p>
           </article>
         </section>
-        <section className="actions">
+        <section className='actions'>
           <Link to='/add-ons'>Go Back</Link>
           <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } } >Confirm</Button>
         </section>
       </article>
     </>
   );
-}
+};

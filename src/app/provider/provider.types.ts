@@ -1,3 +1,4 @@
+// Personal Info Types
 type Details = {
     value: string;
     error: string;
@@ -9,9 +10,21 @@ export type PersonalInfoState = {
     phoneNumber: Details;
     isValid: boolean;
 };
+// END Personal Info Types
 
-export type UsePersonalInfoContext = () => PersonalInfoState;
+// Select Plan Types
+type PlanType = 'ARCADE' | 'ADVANCED' | 'PRO';
+type BillingType = 'MONTHLY' | 'YEARLY';
+type Plan = { type: PlanType, price: number };
+
+export type PlanAndBillingState = {
+    plan: Plan,
+    billing: BillingType,
+    isValid: boolean
+};
+// END Select Plan Types
 
 export type GlobalState = {
-    personalInfo: PersonalInfoState
+    personalInfo: PersonalInfoState,
+    planAndBilling: PlanAndBillingState
 };

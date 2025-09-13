@@ -1,25 +1,32 @@
-import type { PersonalInfoState, GlobalState } from "./provider.types";
+import type { PersonalInfoState, PlanAndBillingState, GlobalState } from "./provider.types";
 
 import { createContext, useContext } from "react";
 
 const personalInfoState: PersonalInfoState = {
   name: {
-    value: '',
+    value: 'Nkululeko',
     error: '',
   },
   email: {
-    value: '',
+    value: 'nkululekovuyo000gmail.com',
     error: '',
   },
   phoneNumber: {
-    value: '',
+    value: '0812726384',
     error: '',
   },
   isValid: false
 };
 
+const planAndBillingState: PlanAndBillingState = {
+  plan: { type: 'ARCADE', price: 9 },
+  billing: 'MONTHLY',
+  isValid: false
+};
+
 export const globalState: GlobalState = {
-  personalInfo: personalInfoState
+  personalInfo: personalInfoState,
+  planAndBilling: planAndBillingState
 };
 
 export const GlobalContext = createContext<GlobalState | undefined>(undefined);

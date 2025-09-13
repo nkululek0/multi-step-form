@@ -2,6 +2,8 @@
 type PlanType = 'ARCADE' | 'ADVANCED' | 'PRO';
 type BillingType = 'MONTHLY' | 'YEARLY';
 type Plan = { type: PlanType, price: number };
+type PlanWithImage = Plan & { image: string };
+export type Plans = Record<PlanType, PlanWithImage>;
 
 export type PlanAndBillingState = {
     plan: Plan,
@@ -11,12 +13,12 @@ export type PlanAndBillingState = {
 
 type ActionPlanAndBillingPlan = {
   type: 'SET_PLAN',
-  payload: Plan
+  payload: PlanType
 };
 
 type ActionPlanAndBillingBilling = {
   type: 'SET_BILLING',
-  payload: BillingType
+  elementReference: React.RefObject<HTMLInputElement | null>
 };
 
 export type PlanAndBillingAction = ActionPlanAndBillingPlan | ActionPlanAndBillingBilling;

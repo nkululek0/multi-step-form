@@ -2,25 +2,59 @@ import ArcadeImage from '../../assets/images/icon-arcade.svg';
 import AdvancedImage from '../../assets/images/icon-advanced.svg';
 import ProImage from '../../assets/images/icon-pro.svg';
 
-import type { PlanAndBillingReducer, PlanAndBillingState, PlanAndBillingAction, NextButtonState, NextButtonReducer } from './Select-Plan.types';
+import type {
+  Plans,
+  PlanAndBillingReducer,
+  PlanAndBillingState,
+  PlanAndBillingAction,
+  NextButtonState,
+  NextButtonReducer
+} from './Select-Plan.types';
 
 import { Button } from '../button';
 
+import { useGlobalContext } from '../../app/provider';
+
 import { Link } from 'react-router-dom';
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
+
+// Define all types of plans
+const plans: Plans = {
+  'ARCADE': {
+    type: 'ARCADE',
+    price: 9,
+    image: ArcadeImage
+  },
+  'ADVANCED': {
+    type: 'ADVANCED',
+    price: 12,
+    image: AdvancedImage
+  },
+  'PRO': {
+    type: 'PRO',
+    price: 15,
+    image: ProImage
+  }
+};
 
 const planAndBillingReducer: PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAndBillingAction) => {
   const { type } = action;
+
   switch (type) {
     case 'SET_PLAN':
+      const { image, ...planWithoutImage } = plans[action.payload];
+
       return {
         ...state,
-        plan: { type: action.payload.type, price: action.payload.price }
+        plan: planWithoutImage
       };
     case 'SET_BILLING':
+      const billing = action.elementReference.current ? action.elementReference.current.checked : false;
+      const billingType = billing ? 'YEARLY' : 'MONTHLY';
+
       return {
         ...state,
-        billing: action.payload
+        billing: billingType
       };
     default:
       return state;
@@ -40,14 +74,12 @@ const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
 
 export function SelectPlan() {
 
-  const planAndBillingState: PlanAndBillingState = {
-    plan: { type: 'ARCADE', price: 9 },
-    billing: 'MONTHLY',
-    isValid: false
-  };
+  const globalContext = useGlobalContext();
+  const planAndBillingState = globalContext.planAndBilling;
   const [planAndBilling, setPlanAndBilling] = useReducer(planAndBillingReducer, planAndBillingState);
   const { billing } = planAndBilling;
-  const additionalContent = billing === 'YEARLY' ? '2 months free' : '';
+
+  const billingCheckBox = useRef<HTMLInputElement>(null);
 
   const nextButtonState: NextButtonState = {
     uri: '/add-ons',
@@ -55,6 +87,8 @@ export function SelectPlan() {
   };
   const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
   const { uri, isValid } = nextButton;
+
+  globalContext.planAndBilling = planAndBilling;
 
   return (
     <>
@@ -64,41 +98,31 @@ export function SelectPlan() {
           <p>You have the option of monthly or yearly billing.</p>
         </header>
         <section className='plan'>
-          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'ARCADE', price: 9 } }) } }>
-            <img src={ ArcadeImage } alt='arcade image' />
-            <h4>Arcade</h4>
-            <p>
-              { billing === 'YEARLY' ? '$90/yr' : '$9/mo' }
-            </p>
-            <p className='additional-content'>
-              { additionalContent }
-            </p>
-          </div>
-          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'ADVANCED', price: 12 } }) } }>
-            <img src={ AdvancedImage } alt='arcade image' />
-            <h4>Advanced</h4>
-            <p>
-              {  billing === 'YEARLY' ? '$120/yr' : '$12/mo' }
-            </p>
-            <p className='additional-content'>
-              { additionalContent }
-            </p>
-          </div>
-          <div onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: { type: 'PRO', price: 15 } }) } }>
-            <img src={ ProImage } alt='arcade image' />
-            <h4>Pro</h4>
-            <p>
-              { billing === 'YEARLY' ? '$150/yr' : '$15/mo' }
-            </p>
-            <p className='additional-content'>
-              { additionalContent }
-            </p>
-          </div>
+          {
+            Object.values(plans).map((plan, index) => {
+              return (
+                <div key={ index } onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: plan.type }) } }>
+                  <img src={ plan.image } alt='arcade image' />
+                  <h4>{ plan.type }</h4>
+                  <p>
+                    { billing === 'YEARLY' ? `$${ plan.price * 10 }/yr` :`$${ plan.price }/mo` }
+                  </p>
+                  <p className='additional-content'>
+                    { billing === 'YEARLY' ? '2 months free' : '' }
+                  </p>
+                </div>
+              )
+            })
+          }
         </section>
         <section className='billing'>
           <p>Monthly</p>
           <label className='switch'>
-            <input type='checkbox' onChange={ () => { setPlanAndBilling({ type: 'SET_BILLING', payload: billing === 'MONTHLY' ? 'YEARLY' : 'MONTHLY' }) } }/>
+            <input
+              ref={ billingCheckBox }
+              type='checkbox'
+              onChange={ () => { setPlanAndBilling({ type: 'SET_BILLING', elementReference: billingCheckBox }) } }
+            />
             <span className='slider round'></span>
           </label>
           <p>Yearly</p>

@@ -44,7 +44,9 @@ const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) 
         state.addOnsList.push(addOnsTypes[addOnType]);
       }
     } else {
-      state.addOnsList.splice(state.addOnsList.indexOf(addOnsTypes[addOnType]), 1);
+      if (state.addOnsList.indexOf(addOnsTypes[addOnType]) !== -1) {
+        state.addOnsList.splice(state.addOnsList.indexOf(addOnsTypes[addOnType]), 1);
+      }
     }
 
     return {

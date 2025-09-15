@@ -46,7 +46,7 @@ export function FinishingUp() {
               <header className='add-ons-plan-header'>
                 <div>
                   <h3>{ plan.type } ({ billing })</h3>
-                  <Link to='/add-ons'>Change</Link>
+                  <Link to='/select-plan'>Change</Link>
                 </div>
                 <p className='add-ons-plan-price'>${ billing === 'MONTHLY' ? plan.price : plan.price * 10 }{  billingAbbreviation }</p>
               </header>

@@ -11,6 +11,8 @@ import type {
 
 import { Button } from '../button';
 
+import { useGlobalContext } from '../../app/provider';
+
 import { useReducer, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -63,12 +65,10 @@ const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
 
 export function AddOns() {
 
-  const addOnsState: AddOnsState = {
-    billingType: 'MONTHLY',
-    addOnsList: []
-  };
-  const [addOns, setAddOns] = useReducer(addOnsReducer, addOnsState);
-  const { billingType } = addOns;
+  const globalState = useGlobalContext();
+  const addOnsState = globalState.addOns;
+  const [, setAddOns] = useReducer(addOnsReducer, addOnsState);
+  const billingType = globalState.planAndBilling.billing;
 
   const planCheckBoxes: PlanCheckBoxes = {
     ONLINE_SERVICE: useRef<HTMLInputElement>(null),

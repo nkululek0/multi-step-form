@@ -1,5 +1,6 @@
-import type { PersonalInfoState, PlanAndBillingState, GlobalState } from "./provider.types";
+import type { PersonalInfoState, PlanAndBillingState, AddOnsState, GlobalState } from "./provider.types";
 
+import react from "react";
 import { createContext, useContext } from "react";
 
 const personalInfoState: PersonalInfoState = {
@@ -24,12 +25,22 @@ const planAndBillingState: PlanAndBillingState = {
   isValid: false
 };
 
-export const globalState: GlobalState = {
+const addOnsState: AddOnsState = {
+  billingType: planAndBillingState.billing,
+  addOnsList: []
+}
+
+const globalState: GlobalState = {
   personalInfo: personalInfoState,
-  planAndBilling: planAndBillingState
+  planAndBilling: planAndBillingState,
+  addOns: addOnsState
 };
 
-export const GlobalContext = createContext<GlobalState | undefined>(undefined);
+const GlobalContext = createContext<GlobalState | undefined>(undefined);
+
+export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
+  return react.createElement(GlobalContext.Provider, { value: globalState }, children);
+}
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext);
 

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { GlobalContext, globalState } from './provider';
+import { GlobalProvider } from './provider';
 
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
@@ -11,9 +11,9 @@ function App() {
   return (
     <>
       <SideBar/>
-      <GlobalContext.Provider value={ globalState }>
+      <GlobalProvider>
         <RouterProvider router={router} />
-      </GlobalContext.Provider>
+      </GlobalProvider>
     </>
   )
 };

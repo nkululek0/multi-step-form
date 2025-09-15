@@ -1,2 +1,2 @@
-export { GlobalContext, useGlobalContext, globalState } from './provider';
-export type { PersonalInfoState, PlanAndBillingState } from './provider.types';
+export { GlobalProvider, useGlobalContext } from './provider';
+export type { PersonalInfoState, PlanAndBillingState, AddOnsState } from './provider.types';

@@ -24,7 +24,20 @@ export type PlanAndBillingState = {
 };
 // END Select Plan Types
 
+// Add Ons Types
+type AddOn = {
+    name: string,
+    description: string,
+    price: number
+};
+export type AddOnsState = {
+    billingType: 'MONTHLY' | 'YEARLY',
+    addOnsList: Array<AddOn>
+};
+// END Add Ons Types
+
 export type GlobalState = {
     personalInfo: PersonalInfoState,
-    planAndBilling: PlanAndBillingState
+    planAndBilling: PlanAndBillingState,
+    addOns: AddOnsState
 };

@@ -5,7 +5,7 @@ import type { PersonalInfoState, PersonalInfoAction, PersonalInfoReducer } from 
 
 import { useGlobalContext } from '../../app/provider';
 
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
 
 const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: PersonalInfoAction) => {
   const { type } = action;
@@ -75,11 +75,14 @@ export function PersonalInfo() {
   const personalInfoState: PersonalInfoState = globalState.personalInfo;
   const [personalInfo, dispatch] = useReducer(reducer, personalInfoState);
   const { name, email, phoneNumber, isValid } = personalInfo;
+  const calledValidator = useRef(false);
   const validator = () => {
     dispatch({ type: 'VALIDATE' });
+    calledValidator.current = true;
   };
 
   globalState.personalInfo = personalInfo;
+  globalState.personalInfo.isValid = calledValidator.current ? isValid : false;
 
   return (
     <>

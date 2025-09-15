@@ -1,32 +1,53 @@
-import type { AddOnsState, AddOnsReducer, AddOnsAction, NextButtonState, NextButtonReducer } from './Add-Ons.types';
+import type {
+  AddOnTypes,
+  AddOnsReducer,
+  AddOnsState,
+  AddOnsAction,
+  AddOnType,
+  PlanCheckBoxes,
+  NextButtonState,
+  NextButtonReducer
+} from './Add-Ons.types';
 
 import { Button } from '../button';
 
 import { useReducer, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => {
-  const { type, elementReference } = action;
-
-  switch (type) {
-    case 'ONLINE_SERVICE':
-      return {
-        ...state,
-        onlineService: elementReference.current ? elementReference.current.checked : false
-      };
-    case 'LARGER_STORAGE':
-      return {
-        ...state,
-        largerStorage: elementReference.current ? elementReference.current.checked : false
-      };
-    case 'CUSTOMIZABLE_PROFILE':
-      return {
-        ...state,
-        customizableProfile: elementReference.current ? elementReference.current.checked : false
-      };
-    default:
-      return state;
+const addOnsTypes: AddOnTypes = {
+  ONLINE_SERVICE: {
+    name: 'Online service',
+    description: 'Access to multiplayer games',
+    price: 1
+  },
+  LARGER_STORAGE: {
+    name: 'Larger storage',
+    description: 'Extra 1TB of cloud save',
+    price: 2
+  },
+  CUSTOMISABLE_PROFILE: {
+    name: 'Customisable Profile',
+    description: 'Custom theme on your profile',
+    price: 2
   }
+};
+
+const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => {
+  const { planType, elementReference } = action;
+  const isAdded = elementReference.current ? elementReference.current.checked : false;
+  const addOnType: AddOnType = planType;
+
+    if (isAdded) {
+      if (state.addOnsList.indexOf(addOnsTypes[addOnType]) === -1) {
+        state.addOnsList.push(addOnsTypes[addOnType]);
+      }
+    } else {
+      state.addOnsList.splice(state.addOnsList.indexOf(addOnsTypes[addOnType]), 1);
+    }
+
+    return {
+      ...state
+    };
 };
 
 const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
@@ -44,16 +65,16 @@ export function AddOns() {
 
   const addOnsState: AddOnsState = {
     billingType: 'MONTHLY',
-    onlineService: false,
-    largerStorage: false,
-    customizableProfile: false
+    addOnsList: []
   };
   const [addOns, setAddOns] = useReducer(addOnsReducer, addOnsState);
   const { billingType } = addOns;
 
-  const onlineServiceCheckbox = useRef<HTMLInputElement>(null);
-  const largerStorageCheckbox = useRef<HTMLInputElement>(null);
-  const customizableProfileCheckbox = useRef<HTMLInputElement>(null);
+  const planCheckBoxes: PlanCheckBoxes = {
+    ONLINE_SERVICE: useRef<HTMLInputElement>(null),
+    LARGER_STORAGE: useRef<HTMLInputElement>(null),
+    CUSTOMISABLE_PROFILE: useRef<HTMLInputElement>(null)
+  };
 
   const nextButtonState: NextButtonState = {
     uri: '/finishing-up',
@@ -71,46 +92,28 @@ export function AddOns() {
             <p>Add-ons help enhance your gaming experience.</p>
           </header>
           <section className='add-ons'>
-            <div className='add-on'>
-              <input
-                type='checkbox'
-                id='online-service'
-                name='online-service'
-                ref={ onlineServiceCheckbox }
-                onChange={ () => { setAddOns({ type: 'ONLINE_SERVICE', elementReference: onlineServiceCheckbox }) } }
-              />
-              <label htmlFor='online-service'>Online service</label>
-              <p>Access to multiplayer games</p>
-              <p>+${ billingType === 'MONTHLY' ? '1/mo': '10/yr' }</p>
-            </div>
-            <div className='add-on'>
-              <input
-                type='checkbox'
-                id='larger-storage'
-                name='larger-storage'
-                ref={ largerStorageCheckbox }
-                onChange={ () => { setAddOns({ type: 'LARGER_STORAGE', elementReference: largerStorageCheckbox }) } }
-              />
-              <label htmlFor='larger-storage'>Larger storage</label>
-              <p>Extra 1TB of cloud save</p>
-              <p>+${ billingType === 'MONTHLY' ? '2/mo': '20/yr' }</p>
-            </div>
-            <div className='add-on'>
-              <input
-                type='checkbox'
-                id='customizable-profile'
-                name='customizable-profile'
-                ref={ customizableProfileCheckbox }
-                onChange={ () => { setAddOns({ type: 'CUSTOMIZABLE_PROFILE', elementReference: customizableProfileCheckbox }) } }
-              />
-              <label htmlFor='customizable-profile'>Customizable profile</label>
-              <p>Custom theme on your profile</p>
-              <p>+${ billingType === 'MONTHLY' ? '2/mo': '20/yr' }</p>
-            </div>
+            {
+              Object.keys(addOnsTypes).map((planType, index) => {
+                const element = planCheckBoxes[planType] as React.RefObject<HTMLInputElement | null>;
+                const addOn = addOnsTypes[planType as AddOnType];
+
+                return (
+                  <div className='add-on' key={ index }>
+                    <input type='checkbox'
+                      ref={ element }
+                      onChange={ () => { setAddOns({ planType: planType as AddOnType, elementReference: element }) } }
+                    />
+                    <label>{ addOn.name }</label>
+                    <p>{ addOn.description }</p>
+                    <p>+${ billingType === 'MONTHLY' ? `${ addOn.price }/mo` : `${ addOn.price * 10 }/yr` }</p>
+                  </div>
+                );
+              })
+            }
           </section>
         </section>
         <section className='actions'>
-          <Link to='/select-plan'>go back</Link>
+          <Link to='/select-plan'>Go Back</Link>
           <Button validationSettings={ { validate: () => { setNextButton(); }, uri: uri, isValid: isValid } }>Next</Button>
         </section>
       </article>

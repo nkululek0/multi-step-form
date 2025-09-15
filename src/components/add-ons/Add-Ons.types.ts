@@ -1,15 +1,24 @@
 // Add-Ons Types
-export type AddOnsState = {
-    billingType: 'MONTHLY' | 'YEARLY',
-    onlineService: boolean,
-    largerStorage: boolean,
-    customizableProfile: boolean
+type AddOn = {
+    name: string,
+    description: string,
+    price: number
 };
 
-export type AddOnsActionType = 'ADD' | 'REMOVE';
-export type AddOnsActionPackage = 'ONLINE_SERVICE' | 'LARGER_STORAGE' | 'CUSTOMIZABLE_PROFILE';
+export type AddOnType = 'ONLINE_SERVICE' | 'LARGER_STORAGE' | 'CUSTOMISABLE_PROFILE';
+
+export type AddOnTypes = Record<AddOnType, AddOn>;
+export type PlanCheckBoxes = {
+    [key: string]: React.RefObject<HTMLInputElement | null>;
+}
+
+export type AddOnsState = {
+    billingType: 'MONTHLY' | 'YEARLY',
+    addOnsList: Array<AddOn>
+};
+
 export type AddOnsAction = {
-    type: AddOnsActionPackage,
+    planType: AddOnType,
     elementReference: React.RefObject<HTMLInputElement | null>
 };
 

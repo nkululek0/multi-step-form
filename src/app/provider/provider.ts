@@ -1,46 +1,61 @@
 import type { PersonalInfoState, PlanAndBillingState, AddOnsState, GlobalState } from "./provider.types";
 
-import react from "react";
-import { createContext, useContext } from "react";
+import { createContext, useContext, createElement, useRef } from "react";
 
-const personalInfoState: PersonalInfoState = {
-  name: {
-    value: 'Nkululeko',
-    error: '',
-  },
-  email: {
-    value: 'nkululekovuyo000gmail.com',
-    error: '',
-  },
-  phoneNumber: {
-    value: '0812726384',
-    error: '',
-  },
-  isValid: false
+const usePersonalState = () => {
+  const personalInfoState: React.RefObject<PersonalInfoState> = useRef({
+    name: {
+      value: 'Nkululeko',
+      error: '',
+    },
+    email: {
+      value: 'nkululekovuyo000gmail.com',
+      error: '',
+    },
+    phoneNumber: {
+      value: '0812726384',
+      error: '',
+    },
+    isValid: false
+  });
+
+  return personalInfoState;
 };
 
-const planAndBillingState: PlanAndBillingState = {
-  plan: { type: 'ARCADE', price: 9 },
-  billing: 'MONTHLY',
-  isValid: false
-};
+const usePlanAndBillingState = () => {
+  const planAndBillingState: React.RefObject<PlanAndBillingState> = useRef({
+    plan: { type: 'ARCADE', price: 9 },
+    billing: 'MONTHLY',
+    isValid: false
+  });
 
-const addOnsState: AddOnsState = {
-  billingType: planAndBillingState.billing,
-  addOnsList: []
+  return planAndBillingState;
 }
 
-const globalState: GlobalState = {
-  personalInfo: personalInfoState,
-  planAndBilling: planAndBillingState,
-  addOns: addOnsState
-};
+const useAddOnsState = () => {
+  const addOnsState: React.RefObject<AddOnsState> = useRef({
+    billingType: usePlanAndBillingState().current.billing,
+    addOnsList: []
+  });
+
+  return addOnsState;
+}
 
 const GlobalContext = createContext<GlobalState | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
-  return react.createElement(GlobalContext.Provider, { value: globalState }, children);
+  const personalInfoState: PersonalInfoState = usePersonalState().current;
+  const planAndBillingState: PlanAndBillingState = usePlanAndBillingState().current;
+  const addOnsState: AddOnsState = useAddOnsState().current;
+  const globalState = {
+    personalInfo: personalInfoState,
+    planAndBilling: planAndBillingState,
+    addOns: addOnsState
+  };
+
+  return createElement(GlobalContext.Provider, { value: globalState }, children);
 }
+
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext);
 

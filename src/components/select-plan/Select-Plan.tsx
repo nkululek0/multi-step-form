@@ -121,6 +121,7 @@ export function SelectPlan() {
             <input
               ref={ billingCheckBox }
               type='checkbox'
+              checked={ billing === 'YEARLY' }
               onChange={ () => { setPlanAndBilling({ type: 'SET_BILLING', elementReference: billingCheckBox }) } }
             />
             <span className='slider round'></span>

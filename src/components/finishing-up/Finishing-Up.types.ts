@@ -1,3 +1,5 @@
+import type { PersonalInfoState } from "../personal-info/Personal-Info.types";
+
 type PlanType = 'ARCADE' | 'ADVANCED' | 'PRO';
 type BillingType = 'MONTHLY' | 'YEARLY';
 
@@ -13,7 +15,8 @@ export type FinishingUpState = {
 
 export type NextButtonState = {
     uri: '/' | '/summary',
-    isValid: boolean
+    isValid: boolean,
+    personalInfo: PersonalInfoState
 };
 
 export type NextButtonReducer = (state: NextButtonState) => NextButtonState;

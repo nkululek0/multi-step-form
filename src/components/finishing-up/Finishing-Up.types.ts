@@ -3,7 +3,7 @@ type BillingType = 'MONTHLY' | 'YEARLY';
 
 type Plan = { type: PlanType, price: number };
 
-type AddOnType = 'ONLINE SERVICE' | 'LARGER STORAGE' | 'CUSTOMISEABLE PROFILE';
+type AddOnType = 'Online service' | 'Larger storage' | 'Customisable profile';
 
 export type FinishingUpState = {
     plan: Plan,

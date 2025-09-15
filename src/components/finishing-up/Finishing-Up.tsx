@@ -1,8 +1,10 @@
 import { Button } from '../button';
-import type { FinishingUpState, NextButtonState, NextButtonReducer } from './Finishing-Up.types';
+import type { NextButtonState, NextButtonReducer } from './Finishing-Up.types';
+
+import { useGlobalContext } from '../../app/provider';
 
 import { Link } from 'react-router-dom';
-import { useRef, useReducer } from 'react';
+import { useReducer } from 'react';
 
 const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
   // Content in here should check if personal information exists
@@ -17,18 +19,12 @@ const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
 
 export function FinishingUp() {
 
-  const finishingUpState: FinishingUpState = {
-    plan: { type: 'ARCADE', price: 9 },
-    billing: 'MONTHLY',
-    addOnsList: [
-      { name: 'ONLINE SERVICE', price: 1 },
-      { name: 'LARGER STORAGE', price: 2 },
-      { name: 'CUSTOMISEABLE PROFILE', price: 2 }
-    ],
-  };
-  const finishingUp = useRef(finishingUpState);
-  const { plan, billing, addOnsList } = finishingUp.current;
+  const globalState = useGlobalContext();
+  const plan = globalState.planAndBilling.plan;
+  const billing = globalState.planAndBilling.billing;
+  const addOnsList = globalState.addOns.addOnsList;
   const billingAbbreviation = billing === 'MONTHLY' ? 'mo' : 'yr';
+  const total = addOnsList.reduce((total, addOn) => total + addOn.price, plan.price);
 
   const nextButtonState: NextButtonState = {
     uri: '/summary',
@@ -52,16 +48,16 @@ export function FinishingUp() {
                   <h3>{ plan.type } ({ billing })</h3>
                   <Link to='/add-ons'>Change</Link>
                 </div>
-                <p className='add-ons-plan-price'>${ plan.price }{  billingAbbreviation }</p>
+                <p className='add-ons-plan-price'>${ billing === 'MONTHLY' ? plan.price : plan.price * 10 }{  billingAbbreviation }</p>
               </header>
-              <hr />
+              { addOnsList.length > 0 && <hr /> }
               <div className='add-ons-list'>
                 {
                   addOnsList.map((addOn, key) => {
                     return (
                       <p className='add-on' key={ key }>
                         <span>{ addOn.name }</span>
-                        <span>+${ addOn.price }/{ billingAbbreviation }</span>
+                        <span>+${ billing === 'MONTHLY' ? addOn.price : addOn.price * 10 }/{ billingAbbreviation }</span>
                       </p>
                     );
                   })
@@ -70,7 +66,7 @@ export function FinishingUp() {
             </section>
             <p className='add-ons-total'>
               <span>Total (per { billing })</span>
-              <span>+${ plan.price }{ billingAbbreviation }</span>
+              <span>+${ billing === 'MONTHLY' ? total : total * 10 }{ billingAbbreviation }</span>
             </p>
           </article>
         </section>

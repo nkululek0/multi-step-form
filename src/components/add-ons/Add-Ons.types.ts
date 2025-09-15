@@ -1,3 +1,5 @@
+import type { PersonalInfoState } from "../personal-info/Personal-Info.types";
+
 // Add-Ons Types
 type AddOn = {
     name: string,
@@ -27,8 +29,9 @@ export type AddOnsReducer = (state: AddOnsState, action: AddOnsAction) => AddOns
 
 // NextButton Types
 export type NextButtonState = {
-    uri: '/' | '/finishing-up',
-    isValid: boolean
+    uri: '/finishing-up' | '/',
+    isValid: boolean,
+    personalInfo: PersonalInfoState
 };
 
 export type NextButtonReducer = (state: NextButtonState) => NextButtonState;

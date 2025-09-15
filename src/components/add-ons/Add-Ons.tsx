@@ -53,12 +53,11 @@ const addOnsReducer: AddOnsReducer = (state: AddOnsState, action: AddOnsAction) 
 };
 
 const nextButtonReducer: NextButtonReducer = (state: NextButtonState) => {
-  // Content in here should check if personal information exists
-  // And if not, redirect to personal info page
-  // Else navigate to next page
-  // Both conditions should manipulate the uri
+  const uri = state.personalInfo.isValid ? '/finishing-up' : '/';
+
   return {
     ...state,
+    uri: uri,
     isValid: true
   };
 };
@@ -78,7 +77,8 @@ export function AddOns() {
 
   const nextButtonState: NextButtonState = {
     uri: '/finishing-up',
-    isValid: false
+    isValid: false,
+    personalInfo: globalState.personalInfo
   };
   const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
   const { uri, isValid } = nextButton;

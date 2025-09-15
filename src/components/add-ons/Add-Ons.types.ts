@@ -2,7 +2,7 @@ import type { PersonalInfoState } from "../personal-info/Personal-Info.types";
 
 // Add-Ons Types
 type AddOn = {
-    name: string,
+    name: 'Online service' | 'Larger storage' | 'Customisable profile',
     description: string,
     price: number
 };

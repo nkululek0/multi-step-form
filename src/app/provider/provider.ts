@@ -1,4 +1,4 @@
-import type { PersonalInfoState, PlanAndBillingState, AddOnsState, GlobalState } from "./provider.types";
+import type { PersonalInfoState, PlanAndBillingState, AddOnsState, FinishingUpState, GlobalState } from "./provider.types";
 
 import { createContext, useContext, createElement, useRef } from "react";
 
@@ -30,7 +30,7 @@ const usePlanAndBillingState = () => {
   });
 
   return planAndBillingState;
-}
+};
 
 const useAddOnsState = () => {
   const addOnsState: React.RefObject<AddOnsState> = useRef({
@@ -38,7 +38,19 @@ const useAddOnsState = () => {
   });
 
   return addOnsState;
-}
+};
+
+const useFinishingUpSate = () => {
+  const planAndBilling = usePlanAndBillingState().current;
+  const addOns = useAddOnsState().current;
+  const finishingUpState: React.RefObject<FinishingUpState> = useRef({
+    plan: planAndBilling.plan,
+    billing: planAndBilling.billing,
+    addOnsList: addOns.addOnsList
+  });
+
+  return finishingUpState;
+};
 
 const GlobalContext = createContext<GlobalState | undefined>(undefined);
 
@@ -46,10 +58,12 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const personalInfoState: PersonalInfoState = usePersonalState().current;
   const planAndBillingState: PlanAndBillingState = usePlanAndBillingState().current;
   const addOnsState: AddOnsState = useAddOnsState().current;
+  const finishingUpState: FinishingUpState = useFinishingUpSate().current;
   const globalState = {
     personalInfo: personalInfoState,
     planAndBilling: planAndBillingState,
-    addOns: addOnsState
+    addOns: addOnsState,
+    finishingUp: finishingUpState
   };
 
   return createElement(GlobalContext.Provider, { value: globalState }, children);

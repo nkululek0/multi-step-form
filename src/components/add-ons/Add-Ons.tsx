@@ -28,7 +28,7 @@ const addOnsTypes: AddOnTypes = {
     price: 2
   },
   CUSTOMISABLE_PROFILE: {
-    name: 'Customisable Profile',
+    name: 'Customisable profile',
     description: 'Custom theme on your profile',
     price: 2
   }

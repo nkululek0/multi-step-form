@@ -25,8 +25,10 @@ export type PlanAndBillingState = {
 // END Select Plan Types
 
 // Add Ons Types
+type AddOnType = 'Online service' | 'Larger storage' | 'Customisable profile';
+
 type AddOn = {
-    name: string,
+    name: AddOnType,
     description: string,
     price: number
 };
@@ -35,8 +37,17 @@ export type AddOnsState = {
 };
 // END Add Ons Types
 
+// Finishing Up Types
+export type FinishingUpState = {
+    plan: Plan,
+    billing: BillingType
+    addOnsList: Array<{ name: AddOnType, price: number }>,
+};
+// END Finishing Up Types
+
 export type GlobalState = {
     personalInfo: PersonalInfoState,
     planAndBilling: PlanAndBillingState,
-    addOns: AddOnsState
+    addOns: AddOnsState,
+    finishingUp: FinishingUpState
 };

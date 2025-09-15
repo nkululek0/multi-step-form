@@ -15,7 +15,6 @@ export type PlanCheckBoxes = {
 }
 
 export type AddOnsState = {
-    billingType: 'MONTHLY' | 'YEARLY',
     addOnsList: Array<AddOn>
 };
 

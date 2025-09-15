@@ -31,7 +31,6 @@ type AddOn = {
     price: number
 };
 export type AddOnsState = {
-    billingType: 'MONTHLY' | 'YEARLY',
     addOnsList: Array<AddOn>
 };
 // END Add Ons Types

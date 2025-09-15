@@ -34,7 +34,6 @@ const usePlanAndBillingState = () => {
 
 const useAddOnsState = () => {
   const addOnsState: React.RefObject<AddOnsState> = useRef({
-    billingType: usePlanAndBillingState().current.billing,
     addOnsList: []
   });
 

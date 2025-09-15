@@ -5,15 +5,15 @@ import { createContext, useContext, createElement, useRef } from "react";
 const usePersonalState = () => {
   const personalInfoState: React.RefObject<PersonalInfoState> = useRef({
     name: {
-      value: 'Nkululeko',
+      value: '',
       error: '',
     },
     email: {
-      value: 'nkululekovuyo000gmail.com',
+      value: '',
       error: '',
     },
     phoneNumber: {
-      value: '0812726384',
+      value: '',
       error: '',
     },
     isValid: false

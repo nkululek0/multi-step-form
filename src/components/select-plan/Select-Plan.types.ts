@@ -1,3 +1,5 @@
+import type { PersonalInfoState } from "../personal-info/Personal-Info.types";
+
 // Select Plan Types
 type PlanType = 'ARCADE' | 'ADVANCED' | 'PRO';
 type BillingType = 'MONTHLY' | 'YEARLY';
@@ -6,9 +8,9 @@ type PlanWithImage = Plan & { image: string };
 export type Plans = Record<PlanType, PlanWithImage>;
 
 export type PlanAndBillingState = {
-    plan: Plan,
-    billing: BillingType,
-    isValid: boolean
+  plan: Plan,
+  billing: BillingType,
+  isValid: boolean
 };
 
 type ActionPlanAndBillingPlan = {
@@ -28,8 +30,9 @@ export type PlanAndBillingReducer = (state: PlanAndBillingState, action: PlanAnd
 
 // Next Button Types
 export type NextButtonState = {
-  uri: '/add-ons' | '/'
-  isValid: boolean
+  uri: '/add-ons' | '/',
+  isValid: boolean,
+  personalInfo: PersonalInfoState
 };
 
 export type NextButtonReducer = (state: NextButtonState) => NextButtonState;

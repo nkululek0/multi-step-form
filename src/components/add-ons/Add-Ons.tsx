@@ -101,6 +101,7 @@ export function AddOns() {
                   <div className='add-on' key={ index }>
                     <input type='checkbox'
                       ref={ element }
+                      checked={ addOnsState.addOnsList.indexOf(addOn) !== -1 }
                       onChange={ () => { setAddOns({ planType: planType as AddOnType, elementReference: element }) } }
                     />
                     <label>{ addOn.name }</label>

@@ -6,6 +6,7 @@
     gap: 2rem;
     background-color: #fff;
     padding: 1.5rem;
+    margin: 1rem;
     border-radius: 8px;
 }
 
@@ -48,8 +49,8 @@
 }
 
 .actions {
-    position: relative;
-    bottom: 0.8rem;
     display: flex;
     justify-content: flex-end;
+    padding: 1rem;
+    background-color: #fff;
 }

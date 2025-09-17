@@ -1,5 +1,6 @@
 :root {
     --light-grey: #00000063;
+    --light-grey-2: #0444a50d;
     --dark-blue: #01146f;
 }
 
@@ -25,6 +26,11 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    .plan.active {
+        border: 1px solid var(--dark-blue);
+        background: var(--light-grey-2);
+    }
 }
 
 .plan {
@@ -62,7 +68,7 @@
     align-items: center;
     padding: 1rem;
     border-radius: 8px;
-    background: #0444a50d;
+    background: var(--light-grey-2);
 }
 
 .billing-text-monthly {

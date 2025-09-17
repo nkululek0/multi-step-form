@@ -81,6 +81,11 @@ export function SelectPlan() {
   const { billing } = planAndBilling;
 
   const billingCheckBox = useRef<HTMLInputElement>(null);
+  const planElements = {
+    ARCADE: useRef<HTMLDivElement>(null),
+    ADVANCED: useRef<HTMLDivElement>(null),
+    PRO: useRef<HTMLDivElement>(null)
+  };
 
   const nextButtonState: NextButtonState = {
     uri: '/add-ons',
@@ -91,6 +96,16 @@ export function SelectPlan() {
   const { uri, isValid } = nextButton;
 
   globalContext.planAndBilling = planAndBilling;
+
+  const handleClick = (elementReference: React.RefObject<HTMLDivElement | null>) => {
+    const activeClass = 'active';
+
+    planElements.ARCADE.current?.classList.remove(styles[activeClass]);
+    planElements.ADVANCED.current?.classList.remove(styles[activeClass]);
+    planElements.PRO.current?.classList.remove(styles[activeClass]);
+
+    elementReference.current?.classList.add(styles[activeClass]);
+  };
 
   return (
     <>
@@ -104,7 +119,12 @@ export function SelectPlan() {
           {
             Object.values(plans).map((plan, index) => {
               return (
-                <div key={ index } onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: plan.type }) } } className={styles['plan']}>
+                <div
+                  key={ index }
+                  ref={ planElements[plan.type] }
+                  onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: plan.type }); handleClick(planElements[plan.type]); } }
+                  className={`${styles['plan']} ${  plan.type === planAndBilling.plan.type ? styles['active'] : '' }`}
+                >
                   <img src={ plan.image } alt='arcade image' className='plan-image'/>
                   <div className={styles['plan-details']}>
                     <h4 className={styles['plan-type']}>{ plan.type }</h4>

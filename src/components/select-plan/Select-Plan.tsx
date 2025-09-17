@@ -100,40 +100,42 @@ export function SelectPlan() {
           <h1>Select your Plan</h1>
           <p>You have the option of monthly or yearly billing.</p>
         </header>
-        <section className='plan'>
+        <section className={styles['plans-wrapper']}>
           {
             Object.values(plans).map((plan, index) => {
               return (
-                <div key={ index } onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: plan.type }) } }>
-                  <img src={ plan.image } alt='arcade image' />
-                  <h4>{ plan.type }</h4>
-                  <p>
-                    { billing === 'YEARLY' ? `$${ plan.price * 10 }/yr` :`$${ plan.price }/mo` }
-                  </p>
-                  <p className='additional-content'>
-                    { billing === 'YEARLY' ? '2 months free' : '' }
-                  </p>
+                <div key={ index } onClick={ () => { setPlanAndBilling({ type: 'SET_PLAN', payload: plan.type }) } } className={styles['plan']}>
+                  <img src={ plan.image } alt='arcade image' className='plan-image'/>
+                  <div className={styles['plan-details']}>
+                    <h4 className={styles['plan-type']}>{ plan.type }</h4>
+                    <p className={styles['plan-price']}>
+                      { billing === 'YEARLY' ? `$${ plan.price * 10 }/yr` :`$${ plan.price }/mo` }
+                    </p>
+                    <p className={styles['additional-content']}>
+                      { billing === 'YEARLY' ? '2 months free' : '' }
+                    </p>
+                  </div>
                 </div>
               )
             })
           }
         </section>
-        <section className='billing'>
-          <p>Monthly</p>
-          <label className='switch'>
+        <section className={styles['billing']}>
+          <p className={styles['billing-text-monthly']}>Monthly</p>
+          <label className={styles['switch']}>
             <input
               ref={ billingCheckBox }
               type='checkbox'
               checked={ billing === 'YEARLY' }
               onChange={ () => { setPlanAndBilling({ type: 'SET_BILLING', elementReference: billingCheckBox }) } }
             />
-            <span className='slider round'></span>
+            <span className={styles['slider']}></span>
           </label>
-          <p>Yearly</p>
+          <p className={styles['billing-text-yearly']}>Yearly</p>
         </section>
       </article>
-      <section className={ styles['actions']}>
-        <Link to='/'>Go Back</Link>
+      <section className={styles['actions']}>
+        <Link to='/' className={styles['back-button']}>Go Back</Link>
         <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } }>Next</Button>
       </section>
     </article>

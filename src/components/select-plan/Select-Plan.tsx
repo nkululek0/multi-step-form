@@ -1,3 +1,5 @@
+import styles from './Select-Plan.module.css';
+
 import ArcadeImage from '../../assets/images/icon-arcade.svg';
 import AdvancedImage from '../../assets/images/icon-advanced.svg';
 import ProImage from '../../assets/images/icon-pro.svg';
@@ -92,8 +94,9 @@ export function SelectPlan() {
 
   return (
     <>
-      <article>
-        <header>
+    <article className='select-plan-wrapper'>
+      <article className={styles['select-plan']}>
+        <header className={styles['header']}>
           <h1>Select your Plan</h1>
           <p>You have the option of monthly or yearly billing.</p>
         </header>
@@ -129,10 +132,11 @@ export function SelectPlan() {
           <p>Yearly</p>
         </section>
       </article>
-      <section className='actions'>
+      <section className={ styles['actions']}>
         <Link to='/'>Go Back</Link>
         <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } }>Next</Button>
       </section>
+    </article>
     </>
   );
 };

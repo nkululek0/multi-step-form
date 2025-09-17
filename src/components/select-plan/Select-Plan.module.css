@@ -1,0 +1,25 @@
+.select-plan {
+    position: relative;
+    bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #fff;
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+}

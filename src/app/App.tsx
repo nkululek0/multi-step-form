@@ -10,10 +10,14 @@ function App() {
 
   return (
     <>
-      <SideBar/>
-      <GlobalProvider>
-        <RouterProvider router={router} />
-      </GlobalProvider>
+      <div className="app-component-wrapper">
+        <SideBar/>
+        <GlobalProvider>
+          <div className="content-wrapper">
+            <RouterProvider router={router} />
+          </div>
+        </GlobalProvider>
+      </div>
     </>
   )
 };

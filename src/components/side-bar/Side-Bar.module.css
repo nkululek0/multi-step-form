@@ -1,0 +1,7 @@
+.side-bar {
+    flex-grow: 4;
+    display: flex;
+    gap: 1rem;
+    background: url('../../assets/images/bg-sidebar-mobile.svg');
+    background-size: cover;
+}

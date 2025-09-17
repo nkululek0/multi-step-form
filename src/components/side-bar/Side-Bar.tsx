@@ -1,9 +1,11 @@
+import Styles from './Side-Bar.module.css';
+
 export function SideBar() {
   return (
     <>
-      <section>
+      <section className={ Styles['side-bar'] } >
         <div className='side-bar-item'>
-          <div>
+          <div className='step-indicator-wrapper'>
             <p>1</p>
           </div>
           <div>
@@ -12,7 +14,7 @@ export function SideBar() {
           </div>
         </div>
         <div className='side-bar-item'>
-          <div>
+          <div className='step-indicator-wrapper'>
             <p>2</p>
           </div>
           <div>
@@ -21,7 +23,7 @@ export function SideBar() {
           </div>
         </div>
         <div className='side-bar-item'>
-          <div>
+          <div className='step-indicator-wrapper'>
             <p>3</p>
           </div>
           <div>
@@ -30,7 +32,7 @@ export function SideBar() {
           </div>
         </div>
         <div className='side-bar-item'>
-          <div>
+          <div className='step-indicator-wrapper'>
             <p>4</p>
           </div>
           <div>

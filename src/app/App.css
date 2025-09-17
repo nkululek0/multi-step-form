@@ -3,3 +3,14 @@
   margin: 0;
   padding: 0;
 }
+
+.app-component-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  padding: 1rem;
+}

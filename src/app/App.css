@@ -11,6 +11,6 @@
 }
 
 .content-wrapper {
-  flex-grow: 1;
+  height: 70vh;
   padding: 1rem;
 }

@@ -1,7 +1,25 @@
 .side-bar {
-    flex-grow: 4;
+    padding-top: 1.5rem;
+    width: 100dvw;
+    height: 30dvh;
     display: flex;
+    justify-content: center;
     gap: 1rem;
     background: url('../../assets/images/bg-sidebar-mobile.svg');
     background-size: cover;
+}
+
+.step-indicator-wrapper {
+    height: 2rem;
+    width: 2rem;
+    color: #fff;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-indicator {
+    display: none;
 }

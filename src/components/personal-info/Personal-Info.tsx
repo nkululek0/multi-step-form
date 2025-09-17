@@ -102,6 +102,7 @@ export function PersonalInfo() {
                 type='text'
                 required
                 value={ name.value }
+                placeholder='e.g. Stephen King'
                 onChange={ (event) => dispatch({ type: 'SET_NAME', payload: event.target.value }) }
                 className={styles['input']}
               />
@@ -115,6 +116,7 @@ export function PersonalInfo() {
                 type='email'
                 required
                 value={ email.value }
+                placeholder='e.g. stephenking@lorem.com'
                 onChange={ (event) => dispatch({ type: 'SET_EMAIL', payload: event.target.value }) }
                 className={styles['input']}
               />
@@ -128,6 +130,7 @@ export function PersonalInfo() {
                 type='tel'
                 required
                 value={ phoneNumber.value }
+                placeholder='e.g. +27 72 123 4567'
                 onChange={ (event) => dispatch({ type: 'SET_PHONE_NUMBER', payload: event.target.value }) }
                 className={styles['input']}
               />

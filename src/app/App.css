@@ -5,12 +5,13 @@
 }
 
 .app-component-wrapper {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
 .content-wrapper {
-  height: 70vh;
+  height: 70dvh;
   padding: 1rem;
+  background-color: rgb(68 107 191 / 8%);
 }

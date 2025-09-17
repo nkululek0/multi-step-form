@@ -89,20 +89,20 @@ export function AddOns() {
 
   return (
     <>
-      <article>
-        <section className='content'>
-          <header>
+      <article className='add-ons-wrapper'>
+        <section className={styles['add-ons']}>
+          <header className={styles['header']}>
             <h1>Pick add-ons</h1>
             <p>Add-ons help enhance your gaming experience.</p>
           </header>
-          <section className='add-ons'>
+          <section className='add-ons-options-wrapper'>
             {
               Object.keys(addOnsTypes).map((planType, index) => {
                 const element = planCheckBoxes[planType] as React.RefObject<HTMLInputElement | null>;
                 const addOn = addOnsTypes[planType as AddOnType];
 
                 return (
-                  <div className='add-on' key={ index }>
+                  <div className='add-on-option' key={ index }>
                     <input type='checkbox'
                       ref={ element }
                       checked={ addOnsState.addOnsList.indexOf(addOn) !== -1 }
@@ -117,8 +117,8 @@ export function AddOns() {
             }
           </section>
         </section>
-        <section className='actions'>
-          <Link to='/select-plan'>Go Back</Link>
+        <section className={styles['actions']}>
+          <Link to='/select-plan' className={styles['back-button']}>Go Back</Link>
           <Button validationSettings={ { validate: () => { setNextButton(); }, uri: uri, isValid: isValid } }>Next</Button>
         </section>
       </article>

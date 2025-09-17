@@ -134,7 +134,7 @@ export function PersonalInfo() {
             </div>
           </form>
         </section>
-        <section className='actions'>
+        <section className={styles['actions']}>
           <Button validationSettings={{ validate: validator, isValid: isValid, uri: '/select-plan' }}>Next</Button>
         </section>
       </article>

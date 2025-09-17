@@ -1,7 +1,12 @@
 .personal-info {
+    position: relative;
+    bottom: 5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
 }
 
 .header {
@@ -40,4 +45,11 @@
 .error {
     color: rgb(255, 0, 0);
     font-weight: bold;
+}
+
+.actions {
+    position: relative;
+    bottom: 0.8rem;
+    display: flex;
+    justify-content: flex-end;
 }

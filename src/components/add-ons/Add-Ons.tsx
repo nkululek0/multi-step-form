@@ -1,3 +1,5 @@
+import styles from './Add-Ons.module.css';
+
 import type {
   AddOnTypes,
   AddOnsReducer,

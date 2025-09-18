@@ -70,8 +70,9 @@ export function AddOns() {
 
   const globalState = useGlobalContext();
   const addOnsState = globalState.addOns;
-  const [, setAddOns] = useReducer(addOnsReducer, addOnsState);
+  const [addOns, setAddOns] = useReducer(addOnsReducer, addOnsState);
   const billingType = globalState.planAndBilling.billing;
+  const stringifiedAddOns = JSON.stringify(addOns.addOnsList);
 
   const planCheckBoxes: PlanCheckBoxes = {
     ONLINE_SERVICE: useRef<HTMLInputElement>(null),
@@ -87,6 +88,8 @@ export function AddOns() {
   const [nextButton, setNextButton] = useReducer(nextButtonReducer, nextButtonState);
   const { uri, isValid } = nextButton;
 
+  globalState.addOns.addOnsList = addOns.addOnsList;
+
   return (
     <>
       <article className='add-ons-wrapper'>
@@ -95,21 +98,26 @@ export function AddOns() {
             <h1>Pick add-ons</h1>
             <p>Add-ons help enhance your gaming experience.</p>
           </header>
-          <section className='add-ons-options-wrapper'>
+          <section className={styles['add-ons-options-wrapper']}>
             {
               Object.keys(addOnsTypes).map((planType, index) => {
                 const element = planCheckBoxes[planType] as React.RefObject<HTMLInputElement | null>;
                 const addOn = addOnsTypes[planType as AddOnType];
+                const isChecked = stringifiedAddOns.includes(JSON.stringify(addOn));
 
                 return (
-                  <div className='add-on-option' key={ index }>
-                    <input type='checkbox'
-                      ref={ element }
-                      checked={ addOnsState.addOnsList.indexOf(addOn) !== -1 }
-                      onChange={ () => { setAddOns({ planType: planType as AddOnType, elementReference: element }) } }
-                    />
-                    <label>{ addOn.name }</label>
-                    <p>{ addOn.description }</p>
+                  <div className={`${styles['add-on-option']} ${isChecked ? styles['active'] : ''}`} key={ index }>
+                    <div className={styles['checkbox-content-group']}>
+                      <input type='checkbox'
+                        ref={ element }
+                        checked={ isChecked }
+                        onChange={ () => { setAddOns({ planType: planType as AddOnType, elementReference: element }) } }
+                      />
+                      <div className={styles['add-on-option-content']}>
+                        <label>{ addOn.name }</label>
+                        <p>{ addOn.description }</p>
+                      </div>
+                    </div>
                     <p>+${ billingType === 'MONTHLY' ? `${ addOn.price }/mo` : `${ addOn.price * 10 }/yr` }</p>
                   </div>
                 );

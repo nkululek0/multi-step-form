@@ -1,3 +1,5 @@
+import styles from './Finishing-Up.module.css';
+
 import { Button } from '../button';
 import type { NextButtonState, NextButtonReducer } from './Finishing-Up.types';
 
@@ -35,9 +37,9 @@ export function FinishingUp() {
 
   return (
     <>
-      <article className='finishing-up'>
-        <section className='content'>
-          <header>
+      <article className='finishing-up-wrapper'>
+        <section className={styles['finishing-up']}>
+          <header className={styles['header']}>
             <h1>Finishing Up</h1>
             <p>Double-check everything looks OK before confirming.</p>
           </header>
@@ -70,7 +72,7 @@ export function FinishingUp() {
             </p>
           </article>
         </section>
-        <section className='actions'>
+        <section className={styles['actions']}>
           <Link to='/add-ons'>Go Back</Link>
           <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } } >Confirm</Button>
         </section>

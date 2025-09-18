@@ -1,0 +1,37 @@
+:root {
+    --light-grey: #00000063;
+    --light-grey-2: #0444a50d;
+    --dark-blue: #01146f;
+}
+
+.finishing-up {
+    position: relative;
+    bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #fff;
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h1 {
+        font-size: 1.5rem;
+        color: var(--dark-blue);
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+}

@@ -7,6 +7,11 @@
     gap: 1rem;
     background: url('../../assets/images/bg-sidebar-mobile.svg');
     background-size: cover;
+
+    .side-bar-item.active div:nth-child(1) {
+        background-color: #fff;
+        color: #000;
+    }
 }
 
 .step-indicator-wrapper {

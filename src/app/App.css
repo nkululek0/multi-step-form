@@ -10,5 +10,6 @@
 }
 
 .content-wrapper {
-  background-color: rgb(68 107 191 / 8%);
+  height: 70dvh;
+  background-color: #f6f5f9;
 }

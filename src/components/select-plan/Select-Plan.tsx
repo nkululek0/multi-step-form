@@ -109,7 +109,7 @@ export function SelectPlan() {
 
   return (
     <>
-    <article className='select-plan-wrapper'>
+    <article className={styles['select-plan-wrapper']}>
       <article className={styles['select-plan']}>
         <header className={styles['header']}>
           <h1>Select your Plan</h1>

@@ -1,3 +1,14 @@
+:root {
+    --background-color: #f6f5f9;
+    --light-grey: #00000063;
+    --light-grey-2: #0444a50d;
+    --dark-blue: #01146f;
+}
+
+.personal-info-wrapper {
+    background-color: var(--background-color);
+}
+
 .personal-info {
     position: relative;
     bottom: 5rem;

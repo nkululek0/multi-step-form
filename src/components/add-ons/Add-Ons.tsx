@@ -92,7 +92,7 @@ export function AddOns() {
 
   return (
     <>
-      <article className='add-ons-wrapper'>
+      <article className={styles['add-ons-wrapper']}>
         <section className={styles['add-ons']}>
           <header className={styles['header']}>
             <h1>Pick add-ons</h1>

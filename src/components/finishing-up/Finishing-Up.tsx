@@ -37,7 +37,7 @@ export function FinishingUp() {
 
   return (
     <>
-      <article className='finishing-up-wrapper'>
+      <article className={styles['finishing-up-wrapper']}>
         <section className={styles['finishing-up']}>
           <header className={styles['header']}>
             <h1>Finishing Up</h1>

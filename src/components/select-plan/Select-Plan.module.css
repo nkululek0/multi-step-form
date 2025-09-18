@@ -1,7 +1,12 @@
 :root {
+    --background-color: #f6f5f9;
     --light-grey: #00000063;
     --light-grey-2: #0444a50d;
     --dark-blue: #01146f;
+}
+
+.select-plan-wrapper {
+  background: var(--background-color);
 }
 
 .select-plan {

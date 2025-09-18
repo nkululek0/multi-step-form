@@ -86,7 +86,7 @@ export function PersonalInfo() {
 
   return (
     <>
-      <article className='personal-info-wrapper'>
+      <article className={styles['personal-info-wrapper']}>
         <section className={styles['personal-info']}>
           <header className={styles['header']}>
             <h1>Personal Info</h1>

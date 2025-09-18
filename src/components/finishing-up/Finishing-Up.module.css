@@ -86,7 +86,8 @@
 
     .add-ons-total {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 1rem;
 
         span:nth-child(1) {
             color: var(--light-grey);

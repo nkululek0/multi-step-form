@@ -65,6 +65,11 @@
     }
 }
 
+.add-on-option-price {
+    color: var(--dark-blue);
+    font-weight: bold;
+}
+
 .actions {
     display: flex;
     justify-content: space-between;

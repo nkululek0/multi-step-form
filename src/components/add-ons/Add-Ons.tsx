@@ -118,7 +118,7 @@ export function AddOns() {
                         <p>{ addOn.description }</p>
                       </div>
                     </div>
-                    <p>+${ billingType === 'MONTHLY' ? `${ addOn.price }/mo` : `${ addOn.price * 10 }/yr` }</p>
+                    <p className={styles['add-on-option-price']}>+${ billingType === 'MONTHLY' ? `${ addOn.price }/mo` : `${ addOn.price * 10 }/yr` }</p>
                   </div>
                 );
               })
@@ -127,7 +127,7 @@ export function AddOns() {
         </section>
         <section className={styles['actions']}>
           <Link to='/select-plan' className={styles['back-button']}>Go Back</Link>
-          <Button validationSettings={ { validate: () => { setNextButton(); }, uri: uri, isValid: isValid } }>Next</Button>
+          <Button validationSettings={ { validate: () => { setNextButton(); }, uri: uri, isValid: isValid } }>Next Step</Button>
         </section>
       </article>
     </>

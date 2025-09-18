@@ -30,6 +30,10 @@
         font-size: 1.5rem;
         color: var(--dark-blue);
     }
+
+    p {
+        color: var(--light-grey);
+    }
 }
 
 .add-ons-options-wrapper {
@@ -78,6 +82,7 @@
 .actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 1rem;
     background-color: #fff;

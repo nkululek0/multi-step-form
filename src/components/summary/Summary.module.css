@@ -18,6 +18,10 @@
     background-color: #fff;
     border-radius: 8px;
 
+    h1 {
+        color: var(--dark-blue);
+    }
+
     p {
         text-align: center;
         color: var(--light-grey);

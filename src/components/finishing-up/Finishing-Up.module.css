@@ -30,6 +30,10 @@
                 font-size: 1.5rem;
                 color: var(--dark-blue);
             }
+
+            p {
+                color: var(--light-grey);
+            }
         }
     }
 }

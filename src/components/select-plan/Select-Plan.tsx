@@ -156,7 +156,7 @@ export function SelectPlan() {
       </article>
       <section className={styles['actions']}>
         <Link to='/' className={styles['back-button']}>Go Back</Link>
-        <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } }>Next</Button>
+        <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } }>Next Step</Button>
       </section>
     </article>
     </>

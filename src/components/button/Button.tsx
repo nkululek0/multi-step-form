@@ -1,3 +1,5 @@
+import styles from './Button.module.css';
+
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -22,6 +24,6 @@ export function Button(props: ButtonProps) {
   }, [validationSettings.isValid]);
 
   return (
-    <button onClick={ () => { validationSettings.validate(); } }>{ children }</button>
+    <button onClick={ () => { validationSettings.validate(); } } className={styles['button']}>{ children }</button>
   );
 };

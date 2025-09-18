@@ -43,21 +43,21 @@ export function FinishingUp() {
             <h1>Finishing Up</h1>
             <p>Double-check everything looks OK before confirming.</p>
           </header>
-          <article className='summary'>
-            <section className='add-ons-wrapper'>
-              <header className='add-ons-plan-header'>
+          <article className={styles['add-ons-summary']}>
+            <section className={styles['add-ons']}>
+              <header className={styles['add-ons-plan-header']}>
                 <div>
-                  <h3>{ plan.type } ({ billing })</h3>
+                  <h3>{ plan.type } ({ billing === 'MONTHLY' ? 'Monthly' : 'Yearly' })</h3>
                   <Link to='/select-plan'>Change</Link>
                 </div>
-                <p className='add-ons-plan-price'>${ billing === 'MONTHLY' ? plan.price : plan.price * 10 }{  billingAbbreviation }</p>
+                <p className='add-ons-plan-price'>${ billing === 'MONTHLY' ? plan.price : plan.price * 10 }/{  billingAbbreviation }</p>
               </header>
               { addOnsList.length > 0 && <hr /> }
-              <div className='add-ons-list'>
+              <div className={styles['add-ons-list']}>
                 {
                   addOnsList.map((addOn, key) => {
                     return (
-                      <p className='add-on' key={ key }>
+                      <p className={styles['add-on']} key={ key }>
                         <span>{ addOn.name }</span>
                         <span>+${ billing === 'MONTHLY' ? addOn.price : addOn.price * 10 }/{ billingAbbreviation }</span>
                       </p>
@@ -66,14 +66,14 @@ export function FinishingUp() {
                 }
               </div>
             </section>
-            <p className='add-ons-total'>
-              <span>Total (per { billing })</span>
-              <span>+${ billing === 'MONTHLY' ? total : total * 10 }{ billingAbbreviation }</span>
+            <p className={styles['add-ons-total']}>
+              <span>Total (per { billing === 'MONTHLY' ? 'month' : 'year' })</span>
+              <span>${ billing === 'MONTHLY' ? total : total * 10 }/{ billingAbbreviation }</span>
             </p>
           </article>
         </section>
         <section className={styles['actions']}>
-          <Link to='/add-ons'>Go Back</Link>
+          <Link to='/add-ons' className={styles['back-button']}>Go Back</Link>
           <Button validationSettings={ { validate: setNextButton, uri: uri, isValid: isValid } } >Confirm</Button>
         </section>
       </article>

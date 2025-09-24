@@ -1,0 +1,13 @@
+:root {
+  --dark-blue: #01146f;
+}
+
+.side-bar-item.active {
+
+  div:nth-child(1) {
+    font-weight: bold;
+    color: var(--dark-blue);
+    background-color: #bfecf1;
+    border: none;
+  }
+}

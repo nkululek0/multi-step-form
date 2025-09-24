@@ -12,19 +12,19 @@ import { NotFound } from '../components/not-found';
 export const router = createBrowserRouter([
   {
     path: '/',
-    Component: (props: any) => React.createElement(SideBarStepIndicator, {...props, children: React.createElement(PersonalInfo), step: 1 }),
+    Component: () => React.createElement(SideBarStepIndicator, {children: React.createElement(PersonalInfo), step: 1 }),
   },
   {
     path: '/select-plan',
-    Component: SelectPlan
+    Component: () => React.createElement(SideBarStepIndicator, {children: React.createElement(SelectPlan), step: 2 }),
   },
   {
     path: '/add-ons',
-    Component: AddOns
+    Component: () => React.createElement(SideBarStepIndicator, {children: React.createElement(AddOns), step: 3 }),
   },
   {
     path: '/finishing-up',
-    Component: FinishingUp
+    Component: () => React.createElement(SideBarStepIndicator, {children: React.createElement(FinishingUp), step: 4 }),
   },
   {
     path: '/summary',

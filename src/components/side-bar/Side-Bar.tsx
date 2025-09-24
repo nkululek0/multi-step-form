@@ -1,4 +1,5 @@
 import styles from './Side-Bar.module.css';
+import './Side-Bar-Step-Indicator.css';
 
 export function SideBar() {
   return (

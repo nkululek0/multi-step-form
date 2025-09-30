@@ -89,7 +89,7 @@ export function PersonalInfo() {
       <article className={styles['personal-info-wrapper']}>
         <section className={styles['personal-info']}>
           <header className={styles['header']}>
-            <h1>Personal Info</h1>
+            <h1>Personal info</h1>
             <p>Please provide your name, email address, and phone number.</p>
           </header>
           <form className={styles['form']}>

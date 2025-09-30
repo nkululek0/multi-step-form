@@ -1,12 +1,5 @@
-:root {
-    --background-color: #f6f5f9;
-    --light-grey: #00000063;
-    --light-grey-2: #0444a50d;
-    --dark-blue: #01146f;
-}
-
 .personal-info-wrapper {
-    background-color: var(--background-color);
+    background-color: var(--grey);
 }
 
 .personal-info {
@@ -28,11 +21,11 @@
 
     h1 {
         font-size: 1.5rem;
-        color: var(--dark-blue);
+        color: var(--blue-950);
     }
 
     p {
-        color: var(--light-grey);
+        color: var(--grey-500);
     }
 }
 
@@ -51,6 +44,11 @@
 .label-wrapper {
     display: flex;
     justify-content: space-between;
+    font-size: 13px;
+
+    label {
+        color: var(--blue-950);
+    }
 }
 
 .input {
@@ -59,8 +57,10 @@
     border-radius: 4px;
     border: 1px solid #ccc;
 }
-.input:active {
-    border: 1px solid #000;
+.input:active,
+.input:focus-visible {
+    outline: none;
+    border: 1px solid var(--purple-600);
 }
 
 .error {

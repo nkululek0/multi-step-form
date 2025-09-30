@@ -1,9 +1,5 @@
-:root {
-    --dark-blue: #01146f;
-}
-
 .button {
-    background-color: var(--dark-blue);
+    background-color: var(--purple-600);
     color: #fff;
     padding: 0.7rem 1.2rem;
     border-radius: 5px;

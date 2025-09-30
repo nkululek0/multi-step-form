@@ -1,12 +1,5 @@
-:root {
-    --background-color: #f6f5f9;
-    --light-grey: #00000063;
-    --light-grey-2: #0444a50d;
-    --dark-blue: #01146f;
-}
-
 .add-ons-wrapper {
-    background-color: var(--background-color);
+    background-color: var(--grey);
 }
 
 .add-ons {
@@ -28,11 +21,11 @@
 
     h1 {
         font-size: 1.5rem;
-        color: var(--dark-blue);
+        color: var(--blue-950);
     }
 
     p {
-        color: var(--light-grey);
+        color: var(--grey-500);
     }
 }
 
@@ -47,12 +40,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--grey-500);
     border-radius: 8px;
 }
 .add-on-option.active {
-    background-color: var(--light-grey-2);
-    border: 1px solid var(--dark-blue);
+    background-color: var(--grey);
+    border: 1px solid var(--purple-600);
 }
 
 .checkbox-content-group {
@@ -65,18 +58,23 @@
 }
 
 .add-on-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
     label {
-        color: var(--dark-blue);
+        color: var(--blue-950);
         font-weight: bold;
     }
     p {
-        font-size: 12px;
+        font-size: 13px;
+        color: var(--grey-500);
     }
 }
 
 .add-on-option-price {
-    color: var(--dark-blue);
-    font-weight: bold;
+    color: var(--purple-600);
+    font-size: 13px;
 }
 
 .actions {
@@ -90,6 +88,6 @@
 
 .back-button {
     text-decoration: none;
-    color: var(--light-grey);
+    color: var(--grey-500);
     font-weight: bold;
 }

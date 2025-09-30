@@ -112,7 +112,7 @@ export function SelectPlan() {
     <article className={styles['select-plan-wrapper']}>
       <article className={styles['select-plan']}>
         <header className={styles['header']}>
-          <h1>Select your Plan</h1>
+          <h1>Select your plan</h1>
           <p>You have the option of monthly or yearly billing.</p>
         </header>
         <section className={styles['plans-wrapper']}>

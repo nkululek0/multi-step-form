@@ -1,12 +1,5 @@
-:root {
-  --background-color: #f6f5f9;
-  --light-grey: #00000063;
-  --light-grey-2: #0444a50d;
-  --dark-blue: #01146f;
-}
-
 .select-plan-wrapper {
-  background: var(--background-color);
+  background: var(--grey);
 }
 
 .select-plan {
@@ -28,11 +21,11 @@
 
   h1 {
     font-size: 1.5rem;
-    color: var(--dark-blue);
+    color: var(--blue-950);
   }
 
   p {
-    color: var(--light-grey);
+    color: var(--grey-500);
   }
 }
 
@@ -42,13 +35,13 @@
   gap: 1rem;
 
   .plan.active {
-      border: 1px solid var(--dark-blue);
-      background: var(--light-grey-2);
+      border: 1px solid var(--purple-600);
+      background: var(--blue-100);
   }
 }
 
 .plan {
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--grey-500);
   display: flex;
   padding: 1rem;
   gap: 1rem;
@@ -57,22 +50,24 @@
 }
 
 .plan-type {
-  color: var(--dark-blue);
+  color: var(--blue-950);
   font-weight: bold;
 }
 
 .plan-details {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.3rem;
 }
 
 .plan-price {
-  color: var(--light-grey);
+  color: var(--grey-500);
+  font-size: 13px;
 }
 
 .additional-content {
-  color: var(--dark-blue)
+  color: var(--blue-950);
+  font-size: 13px;
 }
 
 .billing {
@@ -82,15 +77,15 @@
   align-items: center;
   padding: 1rem;
   border-radius: 8px;
-  background: var(--light-grey-2);
+  background: var(--grey);
 }
 
 .billing-text-monthly {
-  color: var(--dark-blue);
+  color: var(--blue-950);
   font-weight: bold;
 }
 .billing-text-yearly {
-  color: var(--light-grey);
+  color: var(--grey-500);
   font-weight: bold;
 }
 
@@ -133,11 +128,11 @@
 }
 
 input:checked + .slider {
-  background-color: var(--dark-blue);
+  background-color: var(--blue-950);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--dark-blue);
+  box-shadow: 0 0 1px var(--blue-950);
 }
 
 input:checked + .slider:before {
@@ -166,6 +161,6 @@ input:checked + .slider:before {
 
 .back-button {
   text-decoration: none;
-  color: var(--light-grey);
+  color: var(--grey-500);
   font-weight: bold;
 }

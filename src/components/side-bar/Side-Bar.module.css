@@ -23,3 +23,23 @@
 .step-indicator {
     display: none;
 }
+
+@media (min-width: 768px) {
+    .step-indicator {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .side-bar {
+        width: 30dvw;
+        height: auto;
+        display: flex;
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 2rem;
+        background: url('../../assets/images/bg-sidebar-desktop.svg');
+        background-size: cover;
+    }
+}

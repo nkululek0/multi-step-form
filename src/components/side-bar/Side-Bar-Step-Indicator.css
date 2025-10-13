@@ -11,3 +11,10 @@
     border: none;
   }
 }
+
+@media (min-width: 768px) {
+  .side-bar-item {
+    display: flex;
+    gap: 1rem;
+  }
+}

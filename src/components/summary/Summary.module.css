@@ -23,3 +23,20 @@
         color: var(--grey-500);
     }
 }
+
+@media screen and (min-width: 768px) {
+    .summary-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #fff;
+    }
+
+    .summary {
+        bottom: 0;
+        margin: 0;
+        margin-bottom: 10rem;
+        padding: 3.5rem 15rem;
+    }
+}

@@ -82,10 +82,27 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background-color: #fff;
     }
 
     .personal-info {
         bottom: 0;
         margin: 0;
+        padding: 3.5rem 6rem;
+    }
+
+    .form {
+        gap: 2rem;
+    }
+
+    .input-wrapper {
+        gap: 0.5rem;
+    }
+    .input {
+        padding: 0.8rem;
+    }
+
+    .actions {
+        padding: 0 6rem 1rem 0;
     }
 }

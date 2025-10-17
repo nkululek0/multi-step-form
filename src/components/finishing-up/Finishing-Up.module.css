@@ -119,3 +119,32 @@
         font-weight: bold;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .finishing-up-wrapper {
+        background-color: #fff;
+
+        .finishing-up {
+            bottom: 0;
+            margin: 0;
+            padding: 3.5rem 6rem;
+        }
+    }
+
+    .add-ons-summary {
+
+        .add-ons {
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .add-ons-list {
+            gap: 1rem;
+        }
+    }
+
+
+    .actions {
+        padding: 0 6rem 1rem;
+    }
+}

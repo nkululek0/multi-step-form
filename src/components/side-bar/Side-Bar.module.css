@@ -28,6 +28,17 @@
     .step-indicator {
         display: flex;
         flex-direction: column;
+
+        P {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--blue-100);
+        }
+        p:nth-child(2) {
+            font-size: 16px;
+            color: #fff;
+            font-weight: bold;
+        }
     }
 
     .side-bar {
@@ -35,7 +46,7 @@
         height: auto;
         display: flex;
         padding-left: 1.5rem;
-        padding-top: 1.5rem;
+        padding-top: 2rem;
         justify-content: flex-start;
         flex-direction: column;
         gap: 2rem;

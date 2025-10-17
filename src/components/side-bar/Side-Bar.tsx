@@ -29,7 +29,7 @@ export function SideBar() {
           </div>
           <div className={ styles['step-indicator'] }>
             <p>Step 3</p>
-            <p>Add Ons</p>
+            <p>Add-Ons</p>
           </div>
         </div>
         <div className='side-bar-item'>

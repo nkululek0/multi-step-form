@@ -76,7 +76,7 @@
     background-color: #fff;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .personal-info-wrapper {
         height: 100%;
         display: flex;
@@ -103,6 +103,6 @@
     }
 
     .actions {
-        padding: 0 6rem 1rem 0;
+       padding: 0 6rem 1rem;
     }
 }

@@ -29,13 +29,9 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
       };
     case 'VALIDATE':
       isValid = true;
-      let hasNameError = false;
-      let hasEmailError = false;
-      let hasPhoneNumberError = false;
 
       if (name.value === '') {
         name.error = 'This field is required';
-        hasNameError = true;
         isValid = false;
       }
       else {
@@ -44,7 +40,6 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
 
       if (email.value === '') {
         email.error = 'This field is required';
-        hasEmailError = true;
         isValid = false;
       }
       else {
@@ -53,7 +48,6 @@ const reducer: PersonalInfoReducer = (state: PersonalInfoState, action: Personal
 
       if (phoneNumber.value === '') {
         phoneNumber.error = 'This field is required';
-        hasPhoneNumberError = true;
         isValid = false;
       }
       else {

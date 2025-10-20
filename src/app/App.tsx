@@ -4,7 +4,7 @@ import { GlobalProvider } from './provider';
 
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
-import { SideBar } from '../components/side-bar/Side-Bar';
+import { SideBar } from '../components/side-bar';
 
 function App() {
 

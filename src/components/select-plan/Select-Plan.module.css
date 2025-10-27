@@ -81,11 +81,11 @@
 }
 
 .billing-text-monthly {
-  color: var(--blue-950);
+  color: var(--grey-500);
   font-weight: bold;
 }
 .billing-text-yearly {
-  color: var(--grey-500);
+  color: var(--blue-950);
   font-weight: bold;
 }
 
@@ -187,6 +187,9 @@ input:checked + .slider:before {
   .plan {
     flex-direction: column;
     width: 100%;
+  }
+  .plan:hover {
+    cursor: pointer;
   }
 
   .actions {

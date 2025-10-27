@@ -14,9 +14,18 @@
   font-family: "Ubuntu", sans-serif;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}
+
 .app-component-wrapper {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
+  width: 100%;
 }
 
 .content-wrapper {
@@ -26,12 +35,12 @@
 
 @media (min-width: 768px) {
   .app-component-wrapper {
-    height: 100dvh;
+    height: 90dvh;
     flex-direction: row;
   }
 
   .content-wrapper {
-    height: 100dvh;
+    height: 100%;
     width: 100%;
   }
 }
